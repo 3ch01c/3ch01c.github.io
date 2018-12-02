@@ -11,6 +11,7 @@ Eventually I'm going to start publishing things here, but for now, here's some t
 * [How to configure Linux to connect to multiple access points](https://github.com/3ch01c/utils/wiki/Configure-Linux-to-connect-to-multiple-access-points)
 * [How to dedupe files](https://github.com/3ch01c/utils/wiki/dedupe)
 * [How to alert when a server goes down](https://github.com/3ch01c/utils/wiki/How-to-alert-when-a-server-goes-down)
+* [How to setup Amazon Fire HD10](docs/how-to-setup-amazon-fire-hd10.md)
 
 Things I want to write about:
 * How to set up a Pi Zero smart security camera
