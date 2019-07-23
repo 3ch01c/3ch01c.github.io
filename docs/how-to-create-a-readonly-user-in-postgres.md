@@ -15,5 +15,5 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO username;
 
 Test their remote login:
 ```
-psql user:pass@host:port/db
+psql postgres://user:pass@host:port/db
 ```
