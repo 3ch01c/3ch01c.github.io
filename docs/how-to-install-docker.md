@@ -39,3 +39,11 @@ docker run hello-world
 ```
 
 Profit.
+
+## If you're using Raspberry Pi...
+Instead of installing the pre-built `docker-compose` binary, install it with `pip`.
+```
+sudo apt update
+sudo apt install -y python python-pip libffi-dev python-backports.ssl-match-hostname
+sudo pip install docker-compose
+```
