@@ -20,7 +20,7 @@ This process could **permanently break** your device. You are solely responsible
 
 System updates could prevent you from rooting or otherwise modifying your device. You can create a firewall to block updates.
 
-1. Download and install [NoRoot Firewall](https://apkpure.com/noroot-firewall/app.greyshirts.firewall). ([alternate link](https://drive.google.com/open?id=1mD0xvDcRSvhi3D6GFkrt4EPjjfyqWC6X) | SHA256 `b8c7e4fd106c3be8fa0cf02d4d1ff805b9e858f8328fa0f88ca1b91581323bc5`).
+1. Download and install [NoRoot Firewall](https://apkpure.com/noroot-firewall/app.greyshirts.firewall). ([alternate link](https://drive.google.com/open?id=1mD0xvDcRSvhi3D6GFkrt4EPjjfyqWC6X) SHA256 `b8c7e4fd106c3be8fa0cf02d4d1ff805b9e858f8328fa0f88ca1b91581323bc5`).
 
 ``` sh
 adb install "NoRoot Firewall_v3.0.1_apkpure.com.apk"
@@ -33,10 +33,10 @@ adb install "NoRoot Firewall_v3.0.1_apkpure.com.apk"
 
 _Adapted from [retyre's XDA guide](https://forum.xda-developers.com/hd8-hd10/general/hd-10-2017-offline-rooting-t3734860)_
 
-1. Download the [root exploit code](http://myphone-download.wondershare.cc/mgroot/20165195.zip) ([alternate link](https://drive.google.com/open?id=1Yy9oS0bfy5tNXbEsfOToAr5HR_BBPJwb) | SHA256 `8bfc3d5c75964e5fa28c8ffa39a87249ba10ea4180f55f546b2dcc286a585ea8`) and [Super_SU18+](http://myphone-download.wondershare.cc/mgroot/SuperSU_18+.zip) ([alternate link](https://drive.google.com/open?id=1auPqhetUxTB9Kz3_AjfvA65ZaF_Bv6nJ) | SHA256 `b572c1a982d1e0baeb571d3bc0df7f6be11b14553c181c9e0bf737cc4a4fbbfd`).
+1. Download the [root exploit code](http://myphone-download.wondershare.cc/mgroot/20165195.zip) ([alternate link](https://drive.google.com/open?id=1Yy9oS0bfy5tNXbEsfOToAr5HR_BBPJwb) SHA256 `8bfc3d5c75964e5fa28c8ffa39a87249ba10ea4180f55f546b2dcc286a585ea8`) and [Super_SU18+](http://myphone-download.wondershare.cc/mgroot/SuperSU_18+.zip) ([alternate link](https://drive.google.com/open?id=1auPqhetUxTB9Kz3_AjfvA65ZaF_Bv6nJ) SHA256 `b572c1a982d1e0baeb571d3bc0df7f6be11b14553c181c9e0bf737cc4a4fbbfd`).
 
 ``` sh
-wget "http://myphone-download.wondershare.cc/mgroot/20165195.zip" "http://myphone-download.wondershare.cc/mgroot/SuperSU_18+.zip"
+wget -c "http://myphone-download.wondershare.cc/mgroot/20165195.zip" "http://myphone-download.wondershare.cc/mgroot/SuperSU_18+.zip"
 ```
 
 2. Unzip them both to a `20165195` directory.
@@ -111,7 +111,7 @@ su
 root@suez:/ #
 ```
 
-9. Back on your computer, download [SuperSU 2.82 SR5 apk](https://www.apkmirror.com/apk/codingcode/supersu/supersu-2-82-sr5-release/supersu-2-82-sr5-android-apk-download/) ([alternate link](https://drive.google.com/open?id=134SCjUgAk62oKPU-wnHIpX_kTQb6oKYw) | SHA256 `2c7be9795a408d6fc74bc7286658dfe12252824867c3a2b726c1f3c78cee918b`) and install it to the tablet with `adb`.
+9. Back on your computer, download [SuperSU 2.82 SR5 apk](https://www.apkmirror.com/apk/codingcode/supersu/supersu-2-82-sr5-release/supersu-2-82-sr5-android-apk-download/) ([alternate link](https://drive.google.com/open?id=134SCjUgAk62oKPU-wnHIpX_kTQb6oKYw) SHA256 `2c7be9795a408d6fc74bc7286658dfe12252824867c3a2b726c1f3c78cee918b`) and install it to the tablet with `adb`.
 
 ``` sh
 adb install "eu.chainfire.supersu_2.82-SR5-282_minAPI9(nodpi)_apkmirror.com.apk"
@@ -140,7 +140,7 @@ rm -r /data/data-lib/com.wondershare.DashRoot /data/data-lib/wondershare
 
 _Adapted from [tkdfriend's XDA post](https://forum.xda-developers.com/hd8-hd10/general/xposed-framework-fire-hd-8-6th-t3549043)_
 
-1. On your computer, download and install [Xposed Installer](https://forum.xda-developers.com/devdb/project/dl/?id=30660&task=get) ([alternate link](https://drive.google.com/open?id=1NUyq6IhxPzvVpHJ7URXmL_GHImmVky-C) | SHA256 `fb72044f0a5ca5c691ea6e6e7c64d081d09c0b4ac6c896f286845ad41a3ae971`).
+1. On your computer, download and install [Xposed Installer](https://forum.xda-developers.com/devdb/project/dl/?id=30660&task=get) ([alternate link](https://drive.google.com/open?id=1NUyq6IhxPzvVpHJ7URXmL_GHImmVky-C) SHA256 `fb72044f0a5ca5c691ea6e6e7c64d081d09c0b4ac6c896f286845ad41a3ae971`).
 
 ``` sh
 adb install XposedInstaller_by_dvdandroid_19_10_18.apk
@@ -189,7 +189,7 @@ adb reboot
 
 This process requires root, Xposed, and Xposed module _Per App Hacking_.
 
-1. Download and install [FlashFire v0.24](https://forum.xda-developers.com/attachment.php?attachmentid=4517344&d=1528041165) ([alternate link]() | SHA256 `b8edcfa8a684dbd880780eb5d7dcee9b3f09bf0ecaf8b636df4740a48c5f8644`), but **do not open the app yet.**
+1. Download and install [FlashFire v0.24](https://forum.xda-developers.com/attachment.php?attachmentid=4517344&d=1528041165) ([alternate link]() SHA256 `b8edcfa8a684dbd880780eb5d7dcee9b3f09bf0ecaf8b636df4740a48c5f8644`), but **do not open the app yet.**
 
 ``` sh
 adb install ff_free_v0.24.apk
@@ -214,7 +214,7 @@ cp -r /data/app/eu.chainfire.supersu-1 /system/app/ && rm -r /data/app eu.chainf
 
 ## Install Google Play Store
 
-1. Download and unzip [Amazon Fire 5th Gen Supertool](http://rootjunkysdl.com/files/?dir=Amazon%20Fire%205th%20gen/SuperTool) ([alternate link](https://drive.google.com/open?id=1xv4HOTvtHJdleEd4JuUQCH20WgZY_Z78) | SHA256 `49172c338c501e3455f4b9a9ff40f36493496cd4a92222f77d7fa1901ff47b81`).
+1. Download and unzip [Amazon Fire 5th Gen Supertool](http://rootjunkysdl.com/files/?dir=Amazon%20Fire%205th%20gen/SuperTool) ([alternate link](https://drive.google.com/open?id=1xv4HOTvtHJdleEd4JuUQCH20WgZY_Z78) SHA256 `49172c338c501e3455f4b9a9ff40f36493496cd4a92222f77d7fa1901ff47b81`).
 2. Run the script `1-Amazon-Fire-5th-gen.bat` on Windows or `3-Amazon-Fire-5th-gen-linux-mac.sh` on Linux/macOS.
 
 ``` sh
@@ -251,26 +251,30 @@ adb shell pm disable PACKAGE_NAME
 <a name="restore-stock-rom"></a>
 ## Restore stock ROM
 
-If the tablet won't boot, you can usually recover by reinstalling the stock ROM.
+If the tablet won't boot, you can try to recover by reinstalling the stock ROM.
 
-1. Download the [FireOS 5.6.2.0 stock ROM image](https://fireos-tablet-src.s3.amazonaws.com/HYVEuFHo7fyolxBkqoyRFW6thr/update-kindle-40.6.1.2_user_612496320.bin) (SHA256 `2018c579ca34e859644003c1758fd5d72ff6f0ecd47e5453cb82803ddd6b85da`).
+1. Download the [FireOS 5.6.2.0 stock ROM image](wget https://fireos-tablet-src.s3.amazonaws.com/HYVEuFHo7fyolxBkqoyRFW6thr/update-kindle-40.6.1.2_user_612496320.bin
+) (SHA256 `2018c579ca34e859644003c1758fd5d72ff6f0ecd47e5453cb82803ddd6b85da`).
 
 ``` sh
-wget https://fireos-tablet-src.s3.amazonaws.com/HYVEuFHo7fyolxBkqoyRFW6thr/update-kindle-40.6.1.2_user_612496320.bin
+wget -c https://fireos-tablet-src.s3.amazonaws.com/fqt0doGd1liHKioAFObgRm6oGA/update-kindle-40.6.3.6_user_636558520.bin
 ```
 
 2. Hold the power and volume decrease buttons simultaneously until the device boots into recovery mode.
 
 ``` sh
-adb
+adb reboot recovery
 ```
 
-3. Press the volume decrease button until you reach the option _Install update from adb_. Press the power button to select it.
+3. Press the volume decrease button to select the option _apply update from adb_ then press the power button.
+
 4. Sideload the stock image with `adb`.
 
 ``` sh
 adb sideload update-kindle-40.6.1.2_user_612496320.bin
 ```
+
+5. If the device still won't boot, [contact Amazon customer support](https://www.amazon.com/gp/help/customer/contact-us) to get a replacement.
 
 ## Troubleshooting
 
