@@ -1,6 +1,6 @@
 # How to install Docker
 
-Pick a Docker version: `test` or `get` (i.e., stable).
+ThThisFirick a Docker version: `test` or `get` (i.e., stable).
 ```
 DOCKER_VERSION="test" # or "get" if you're scared
 ```
@@ -51,5 +51,6 @@ sudo pip install docker-compose
 ## References
 https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTg5MTMwMjEsMTA4NzU1MDAzMl19
+eyJoaXN0b3J5IjpbLTExMzQ5Mjc3ODYsLTEyNTg5MTMwMjEsMT
+A4NzU1MDAzMl19
 -->
