@@ -12,7 +12,7 @@ curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 
 Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
 ```
-DOCKER_COMPOSE_VERSION="1.24.1"5.0-rc2" # or "1.24.1" if you're scared
+DOCKER_COMPOSE_VERSION="1.25.0-rc2" # or "1.24.1" if you're scared
 ```
 
 Download `docker-compose`.
@@ -51,5 +51,5 @@ sudo pip install docker-compose
 ## References
 https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4NzU1MDAzMl19
+eyJoaXN0b3J5IjpbLTEyNTg5MTMwMjEsMTA4NzU1MDAzMl19
 -->
