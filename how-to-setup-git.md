@@ -24,6 +24,7 @@ Get the signing key fingerprint and configure the repository.
 GIT_SIGNING_KEY=$(gpg --list-keys --with-colons $GIT_EMAIL | awk -F: '/^pub:/ { print $5 }')
 git config user.signingkey $SIGNING_KEY
 ```
+Add the signing key
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg0MDI4NDI5OV19
+eyJoaXN0b3J5IjpbMTQ1NjA2NTc5NywxODQwMjg0Mjk5XX0=
 -->
