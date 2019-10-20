@@ -26,12 +26,15 @@ git config user.signingkey $GIT_SIGNING_KEY
 ```
 ## Troubleshooting
 ### `error: gpg failed to sign the data`
-Ensure Git was configured to use the signing key.
+Ensure the signing key was configured correctly.
+```
+`
+
 Configure TTY.
 ```
 export GPG_TTY=$(tty)
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYwMTUwMzYzMSwtMTg0Mzk4ODY5MCwxMz
-c2NzYxNjAxXX0=
+eyJoaXN0b3J5IjpbLTE5NDE4NTg2OTYsLTE4NDM5ODg2OTAsMT
+M3Njc2MTYwMV19
 -->
