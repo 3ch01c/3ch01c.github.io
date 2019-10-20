@@ -35,11 +35,11 @@ If that doesn't work, configure TTY.
 ```
 export GPG_TTY=$(tty)
 ```
-If that doesn't work, add correct GPG program.
+If that doesn't work, configure Git to use the correct GPG program.
 ```
 git config gpg.program $GPG_PROGRAM
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMzk2MTU0NzYsLTE4NDM5ODg2OTAsMT
-M3Njc2MTYwMSwxODQwMjg0Mjk5XX0=
+eyJoaXN0b3J5IjpbLTE1OTM0ODc1OCwtMTg0Mzk4ODY5MCwxMz
+c2NzYxNjAxLDE4NDAyODQyOTldfQ==
 -->
