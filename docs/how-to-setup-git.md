@@ -2,6 +2,8 @@
 ## Clone a repository
 Clone a repository.
 ``` sh
+GIT_USERNAME=hiro
+GIT_REPO=
 GIT_REPO_URL=https://github.com/3ch01c/3ch01c.github.io
 git clone $GIT_REPO_URL
 ```
@@ -49,6 +51,6 @@ If that doesn't work, configure Git to use the correct GPG program.
 git config gpg.program $GPG_PROGRAM
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTg5ODQ4MzQsLTE1OTM0ODc1OCwtMT
+eyJoaXN0b3J5IjpbLTEzOTUxODU4ODQsLTE1OTM0ODc1OCwtMT
 g0Mzk4ODY5MCwxMzc2NzYxNjAxXX0=
 -->
