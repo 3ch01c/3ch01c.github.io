@@ -24,10 +24,14 @@ Get the signing key fingerprint and configure the repository.
 GIT_SIGNING_KEY=$(gpg --list-keys --with-colons $GIT_EMAIL | awk -F: '/^pub:/ { print $5 }')
 git config user.signingkey $GIT_SIGNING_KEY
 ```
+## Troubleshooting
+### `error: gpg failed to sign the data`
+Ensure Git was configured to use the signing key.
 Configure TTY.
 ```
 export GPG_TTY=$(tty)
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDM5ODg2OTAsMTM3Njc2MTYwMV19
+eyJoaXN0b3J5IjpbMTYwMTUwMzYzMSwtMTg0Mzk4ODY5MCwxMz
+c2NzYxNjAxXX0=
 -->
