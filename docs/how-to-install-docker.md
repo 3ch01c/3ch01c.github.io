@@ -53,8 +53,8 @@ sudo pip install docker-compose
 ```
 
 ## References
-https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html
+[https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjg0MTYxNjM2LC03ODQ0MjA5MDcsLTEyNT
-g5MTMwMjEsMTA4NzU1MDAzMl19
+eyJoaXN0b3J5IjpbLTQwMjUyNTQ4MCw2ODQxNjE2MzYsLTc4ND
+QyMDkwNywtMTI1ODkxMzAyMSwxMDg3NTUwMDMyXX0=
 -->
