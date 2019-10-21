@@ -31,7 +31,10 @@ Add the user to the `docker` group.
 sudo adduser $(whoami) docker
 ```
 
-Log out and back in.Set primary group to 
+Set primary group to `docker`. (Or log out and back in.)
+```
+newgrp docker
+```
 
 Test some docker commands.
 ```
@@ -52,6 +55,6 @@ sudo pip install docker-compose
 ## References
 https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODI5OTgzMzEsLTc4NDQyMDkwNywtMT
-I1ODkxMzAyMSwxMDg3NTUwMDMyXX0=
+eyJoaXN0b3J5IjpbNjg0MTYxNjM2LC03ODQ0MjA5MDcsLTEyNT
+g5MTMwMjEsMTA4NzU1MDAzMl19
 -->
