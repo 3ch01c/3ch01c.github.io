@@ -19,10 +19,11 @@ Eventually I'm going to start publishing things here, but for now, here's some t
 * [How to give a user read access to a Postgres database](docs/how-to-create-a-readonly-user-in-postgres.md)
 * [How to set up Git](docs/how-to-setup-git.md)
 * [How to SSH via proxy](docs/ssh-via-proxy.md)
+* [How to install Moto X Pure factory image](docs/how-to-install-motorola-xt575-stock-image.md)
 
 Things I want to write about:
 * How to set up a Pi Zero smart security camera
 * How to set up autofs
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTUwMzYzNTE5XX0=
+eyJoaXN0b3J5IjpbLTE4MTA0MDgzMzYsNTUwMzYzNTE5XX0=
 -->
