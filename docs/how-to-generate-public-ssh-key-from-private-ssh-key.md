@@ -8,5 +8,7 @@ ssh-keygen -y -f $PRIVATE_KEY > $PRIVATE_KEY.pub
 To do it in batch for a bunch of `.pem` files:
 
 ``` sh
-find . -name "*.pem" -exec ssh-keygen -y -f {} > {}.pub \;
+sudo apt-get update
+sudo apt-get install -y ssh-askpass
+find . -name "*.pem" | while read -r key; do ssh-keygen -y -f $key > $key.pub; done
 ```
