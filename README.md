@@ -20,6 +20,7 @@ Eventually I'm going to start publishing things here, but for now, here's some t
 * [How to set up Git](docs/how-to-setup-git.md)
 * [How to SSH via proxy](docs/ssh-via-proxy.md)
 * [How to install Moto X Pure factory image](docs/how-to-install-motorola-xt575-stock-image.md)
+* [How to password protect a private SSH key](docs/how-to-password-protect-a-private-SSH-key.md)
 
 Things I want to write about:
 * How to set up a Pi Zero smart security camera
