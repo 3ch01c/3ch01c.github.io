@@ -1,55 +1,92 @@
 # How to set up Git
+
 ## Clone a repository
-Clone a repository.
+
+Clone with HTTPS.
+
 ``` sh
-GIT_USERNAME=hiro
-GIT_REPO=
-GIT_REPO_URL=https://github.com/3ch01c/3ch01c.github.io
+GIT_USER="3ch01c"
+GIT_REPO_NAME="3ch01c.github.io"
+GIT_REPO_URL="https://github.com/$GIT_USER/$GIT_REPO_NAME.git" # https://github.com/3ch01c/3ch01c.github.io.git
 git clone $GIT_REPO_URL
 ```
-Change to the repository directory
-```
-GIT_REPO_PATH=
-```
-## Add user identity
-Add name and email.
-``` sh
-GIT_NAME="Hiro Protagonist"
-GIT_EMAIL="me@users.noreply.github.com"
-git config user.name $GIT_NAME
-git config user.email $GIT_EMAIL
-```
-## Add GPG signing
 
-Configure Git to use GPG signing.
+Or clone with SSH.
+
+``` sh
+GIT_USER="3ch01c"
+GIT_REPO_NAME="3ch01c.github.io"
+SSH_USER="git@github.com"
+GIT_REPO_URL="$SSH_USER:$GIT_USER/$GIT_REPO_NAME.git" # git@github.com:3ch01c/3ch01c.github.io.git
+git clone $GIT_REPO_URL
+```
+
+## Identify yourself
+
+Add user name/email to the current project.
+
+``` sh
+GIT_USER_NAME="Jack Miner"
+GIT_USER_EMAIL="5547581+3ch01c@users.noreply.github.com"
+git config user.name $GIT_USER_NAME
+git config user.email $GIT_USER_EMAIL
+```
+
+## Sign your commits <a name="#gpg"></a>
+
+Use GPG signing globally.
+
 ``` sh
 git config --global commit.gpgsign true
+export GPG_PROGRAM gpg
 ```
-Change to the Git repository path.
-```
-GIT_REPO_PATH=$HOME/projects/myproject
-cd $GIT_REPO_PATH
-```
-Get the signing key fingerprint and configure the repository.
+
+Assign a GPG key for signing commits.
+
 ``` sh
-GPG_PROGRAM=gpg
-GIT_SIGNING_KEY=$($GPG_PROGRAM --list-keys --with-colons $GIT_EMAIL | awk -F: '/^pub:/ { print $5 }')
+GIT_SIGNING_KEY=$($GPG_PROGRAM --list-keys --with-colons $GIT_USER_EMAIL | awk -F: '/^pub:/ { print $5 }')
 git config user.signingkey $GIT_SIGNING_KEY
 ```
-## Troubleshooting
-### `error: gpg failed to sign the data`
-Ensure the signing key was configured correctly.
+
+## Save your Git credentials
+
+_[Thanks Jay Patel!](https://stackoverflow.com/a/28562712/4068278)_
+
+Enable [credential caching](https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux).
+
+``` sh
+git config credential.helper store
 ```
+
+Specify cache expiration.
+
+``` sh
+git config --global credential.helper 'cache --timeout 7200'
+```
+
+## Troubleshooting
+
+### `error: gpg failed to sign the data`
+
+Ensure the signing key was configured correctly.
+
+``` sh
 git config --get user.signingkey
 ```
-If that doesn't work, configure TTY.
-```
+
+If the key looks bad, refer to [how to sign your commits](#gpg). If the key looks good, set `GPG_TTY`.
+
+``` sh
 export GPG_TTY=$(tty)
 ```
-If that doesn't work, configure Git to use the correct GPG program.
-```
+
+If that doesn't work, configure Git to use the correct GPG program. Maybe it's `gpg` or maybe it's `gpg2` or maybe it's something else.
+
+``` sh
+GPG_PROGRAM="gpg"
 git config gpg.program $GPG_PROGRAM
 ```
+
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTEzOTUxODU4ODQsLTE1OTM0ODc1OCwtMT
 g0Mzk4ODY5MCwxMzc2NzYxNjAxXX0=
