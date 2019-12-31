@@ -2,11 +2,11 @@
 
 Sometimes [I write code](https://github.com/3ch01c).
 
-<figure><embed src="https://wakatime.com/share/@3ch01c/363531d2-ec9d-454c-9768-d17216103810.svg"/></figure>
+![https://wakatime.org/@3ch01c](https://wakatime.com/share/@3ch01c/363531d2-ec9d-454c-9768-d17216103810.svg)
 
 Sometimes [I teach other people how to code](https://coderdojolosalamos.wordpress.com).
 
-Sometimes I plan to blog or something there, but then it just comes out as notes.
+Sometimes I plan to blog or something here, but then it just comes out as notes.
 
 * [How to set up OpenVPN](https://github.com/3ch01c/utils/blob/master/docs/openvpn_setup.md)
 * [How to set up Deluge](https://github.com/3ch01c/utils/blob/master/docs/deluge_setup.md)
