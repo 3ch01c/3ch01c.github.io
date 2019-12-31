@@ -2,7 +2,7 @@
 
 Sometimes [I write code](https://github.com/3ch01c).
 
-<figure><embed src="https://wakatime.com/share/@3ch01c/363531d2-ec9d-454c-9768-d17216103810.svg"></embed></figure>
+<figure><embed src="https://wakatime.com/share/@3ch01c/363531d2-ec9d-454c-9768-d17216103810.svg"/></figure>
 
 Sometimes [I teach other people how to code](https://coderdojolosalamos.wordpress.com).
 
