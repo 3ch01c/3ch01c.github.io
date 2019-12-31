@@ -38,7 +38,6 @@ Use GPG signing globally.
 
 ``` sh
 git config --global commit.gpgsign true
-export GPG_PROGRAM gpg
 ```
 
 Assign a GPG key for signing commits.
