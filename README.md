@@ -1,6 +1,12 @@
-# Hi.
+# Hi
 
-Eventually I'm going to start publishing things here, but for now, here's some things I've written.
+Sometimes [I write code](https://github.com/3ch01c).
+
+<figure><embed src="https://wakatime.com/share/@3ch01c/363531d2-ec9d-454c-9768-d17216103810.svg"></embed></figure>
+
+Sometimes [I teach other people how to code](https://coderdojolosalamos.wordpress.com).
+
+Sometimes I plan to blog or something there, but then it just comes out as notes.
 
 * [How to set up OpenVPN](https://github.com/3ch01c/utils/blob/master/docs/openvpn_setup.md)
 * [How to set up Deluge](https://github.com/3ch01c/utils/blob/master/docs/deluge_setup.md)
@@ -21,10 +27,10 @@ Eventually I'm going to start publishing things here, but for now, here's some t
 * [How to SSH via proxy](docs/ssh-via-proxy.md)
 * [How to install Moto X Pure factory image](docs/how-to-install-motorola-xt575-stock-image.md)
 * [How to password protect a private SSH key](docs/how-to-password-protect-a-private-SSH-key.md)
-
-Things I want to write about:
+* [AWS notes](docs/aws.md)
 * How to set up a Pi Zero smart security camera
 * How to set up autofs
+
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTE4MTA0MDgzMzYsNTUwMzYzNTE5XX0=
 -->
