@@ -32,5 +32,6 @@ Sometimes I plan to blog or something here, but then it just comes out as notes.
 * How to set up autofs
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTA0MDgzMzYsNTUwMzYzNTE5XX0=
+eyJoaXN0b3J5IjpbLTEwMjY3MTI4NDYsLTE4MTA0MDgzMzYsNT
+UwMzYzNTE5XX0=
 -->
