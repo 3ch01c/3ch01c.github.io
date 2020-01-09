@@ -54,7 +54,7 @@ _[Thanks Jay Patel!](https://stackoverflow.com/a/28562712/4068278)_
 Enable [credential caching](https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux).
 
 ```sh
-git config credential.helper store
+git config --global credential.helper store
 ```
 
 Specify cache expiration.
