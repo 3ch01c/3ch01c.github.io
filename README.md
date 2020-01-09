@@ -28,6 +28,7 @@ Sometimes I plan to blog or something here, but then it just comes out as notes.
 * [How to install Moto X Pure factory image](docs/how-to-install-motorola-xt575-stock-image.md)
 * [How to password protect a private SSH key](docs/how-to-password-protect-a-private-SSH-key.md)
 * [AWS notes](docs/aws.md)
+* [How to flash stock image on XT1575](docs/how-to-flash-stock-on-xt1575.md)
 * How to set up a Pi Zero smart security camera
 * How to set up autofs
 
