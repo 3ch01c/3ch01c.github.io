@@ -32,6 +32,7 @@ Sometimes I plan to blog or something here, but then it just comes out as notes.
 - [How to batch rename files](docs/how-to-batch-rename-files.md)
 - How to set up a Pi Zero smart security camera
 - How to set up autofs
+- [How to add metadata to media files](docs/how-to-add-metadata-to-media-files.md)
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTEwMjY3MTI4NDYsLTE4MTA0MDgzMzYsNT
