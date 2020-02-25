@@ -10,8 +10,7 @@ Description:	Raspbian GNU/Linux 9.9 (stretch)
 Install the latest kernel headers.
 
 ```sh
-GIT_HASH=$(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
-git clone https://github.com/raspberrypi/firmware
+git clone https://github.com/raspberrypi/firmware --branch $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
 
 ```
 
@@ -37,6 +36,6 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExNzQ1NTY1NiwyMjUyNTQ4NDIsMTYyMz
-A5NTg2Myw3MTQ2NDc0NTksLTQzMjMzNjg3Ml19
+eyJoaXN0b3J5IjpbNzA2NTA0OTM2LDIyNTI1NDg0MiwxNjIzMD
+k1ODYzLDcxNDY0NzQ1OSwtNDMyMzM2ODcyXX0=
 -->
