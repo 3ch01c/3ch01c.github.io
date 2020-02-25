@@ -11,8 +11,8 @@ Install the kernel headers for your kernel version.
 
 ```sh
 FIRMWARE_HASH=$(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
-KERNEL_HASH=
-sudo rpi-update $(wget https://raw.github.com/raspberrypi/firmware/$FIRMWARE_HASH/extra/git_hash -O -)
+KERNEL_HASH=$(wget https://raw.github.com/raspberrypi/firmware/$FIRMWARE_HASH/extra/git_hash -O -)
+sudo rpi-update $KERNEL_HASH
 ```
 
 Clone the [mt7610u_wifi_sta_v3002_dpo_20130916](https://github.com/chenhaiq/mt7610u_wifi_sta_v3002_dpo_20130916) project.
@@ -37,8 +37,8 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTM2Njk0MjksNzUxMDQ4OTQ4LC0yMT
-A4MDg0OTkzLDY1NDU3MjM2NiwxNDE5NzQ4MTgzLDcwNjUwNDkz
-NiwyMjUyNTQ4NDIsMTYyMzA5NTg2Myw3MTQ2NDc0NTksLTQzMj
-MzNjg3Ml19
+eyJoaXN0b3J5IjpbLTY1MjU3MzQwOSw3NTEwNDg5NDgsLTIxMD
+gwODQ5OTMsNjU0NTcyMzY2LDE0MTk3NDgxODMsNzA2NTA0OTM2
+LDIyNTI1NDg0MiwxNjIzMDk1ODYzLDcxNDY0NzQ1OSwtNDMyMz
+M2ODcyXX0=
 -->
