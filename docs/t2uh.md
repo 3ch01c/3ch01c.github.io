@@ -10,7 +10,9 @@ Description:	Raspbian GNU/Linux 9.9 (stretch)
 Install the latest kernel headers.
 
 ```sh
-sudo apt install raspberrypi-kernel-
+GIT_HASH=$(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
+git clone https://github.com/raspberrypi/firmware
+
 ```
 
 Clone the [mt7610u_wifi_sta_v3002_dpo_20130916](https://github.com/chenhaiq/mt7610u_wifi_sta_v3002_dpo_20130916) project.
@@ -35,6 +37,6 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjI1MjU0ODQyLDE2MjMwOTU4NjMsNzE0Nj
-Q3NDU5LC00MzIzMzY4NzJdfQ==
+eyJoaXN0b3J5IjpbMjExNzQ1NTY1NiwyMjUyNTQ4NDIsMTYyMz
+A5NTg2Myw3MTQ2NDc0NTksLTQzMjMzNjg3Ml19
 -->
