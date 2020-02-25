@@ -15,7 +15,7 @@ KERNEL_HASH=$(wget https://raw.github.com/raspberrypi/firmware/$FIRMWARE_HASH/ex
 sudo rpi-update $KERNEL_HASH
 ```
 
-Clone the drivers.
+Download the drivers.
 
 ```sh
 git clone https://github.com/chenhaiq/mt7610u_wifi_sta_v3002_dpo_20130916
@@ -37,7 +37,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg2MDgwNTIxMCw3NTEwNDg5NDgsLTIxMD
+eyJoaXN0b3J5IjpbLTUyNTIyNzU3NSw3NTEwNDg5NDgsLTIxMD
 gwODQ5OTMsNjU0NTcyMzY2LDE0MTk3NDgxODMsNzA2NTA0OTM2
 LDIyNTI1NDg0MiwxNjIzMDk1ODYzLDcxNDY0NzQ1OSwtNDMyMz
 M2ODcyXX0=
