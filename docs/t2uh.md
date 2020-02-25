@@ -1,6 +1,6 @@
 # How to install Archer T2UH drivers on Raspbian
 
-This guide was written using `4.19.105-v7+` kernel. You can check your kernel version with `uname`.
+This guide was written using `4.19.105-v7+` kernel.
 
 ```sh
 $ uname -r
@@ -36,7 +36,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1MDczMjE2LDY1NDU3MjM2NiwxNDE5Nz
-Q4MTgzLDcwNjUwNDkzNiwyMjUyNTQ4NDIsMTYyMzA5NTg2Myw3
-MTQ2NDc0NTksLTQzMjMzNjg3Ml19
+eyJoaXN0b3J5IjpbLTIxMDgwODQ5OTMsNjU0NTcyMzY2LDE0MT
+k3NDgxODMsNzA2NTA0OTM2LDIyNTI1NDg0MiwxNjIzMDk1ODYz
+LDcxNDY0NzQ1OSwtNDMyMzM2ODcyXX0=
 -->
