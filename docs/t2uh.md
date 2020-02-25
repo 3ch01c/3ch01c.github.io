@@ -7,7 +7,7 @@ $ lsb_release -d
 Description:	Raspbian GNU/Linux 9.9 (stretch)
 ```
 
-Install the latest kernel headers.
+Install the kernel headers for your system.
 
 ```sh
 git clone https://github.com/raspberrypi/firmware --branch $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
@@ -36,7 +36,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjU0NTcyMzY2LDE0MTk3NDgxODMsNzA2NT
-A0OTM2LDIyNTI1NDg0MiwxNjIzMDk1ODYzLDcxNDY0NzQ1OSwt
-NDMyMzM2ODcyXX0=
+eyJoaXN0b3J5IjpbLTE2MjA2MTQ3NjAsNjU0NTcyMzY2LDE0MT
+k3NDgxODMsNzA2NTA0OTM2LDIyNTI1NDg0MiwxNjIzMDk1ODYz
+LDcxNDY0NzQ1OSwtNDMyMzM2ODcyXX0=
 -->
