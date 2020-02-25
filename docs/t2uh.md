@@ -10,7 +10,7 @@ Description:	Raspbian GNU/Linux 9.9 (stretch)
 Install the latest kernel headers.
 
 ```sh
-sudo apt install linux-headers-$(uname -r)
+sudo apt install raspberrypi-kernel-
 ```
 
 Clone the [mt7610u_wifi_sta_v3002_dpo_20130916](https://github.com/chenhaiq/mt7610u_wifi_sta_v3002_dpo_20130916) project.
@@ -35,6 +35,6 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1Mjg2NTA1NiwxNjIzMDk1ODYzLDcxND
-Y0NzQ1OSwtNDMyMzM2ODcyXX0=
+eyJoaXN0b3J5IjpbMjI1MjU0ODQyLDE2MjMwOTU4NjMsNzE0Nj
+Q3NDU5LC00MzIzMzY4NzJdfQ==
 -->
