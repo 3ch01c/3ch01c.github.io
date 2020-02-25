@@ -7,11 +7,10 @@ $ uname -r
 4.19.105-v7+
 ```
 
-Install the kernel headers for your system.
+Install the kernel headers.
 
 ```sh
-git clone https://github.com/raspberrypi/firmware --branch 
-sudo rpi-update $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
+git clone https://github.com/raspberrypi/firmware --branch $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
 sudo rpi-update $(cat firmware/extra/git_hash)
 ```
 
@@ -37,7 +36,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMTYxMzY5MCwtMjEwODA4NDk5Myw2NT
+eyJoaXN0b3J5IjpbMTc1MTUwOTY3MywtMjEwODA4NDk5Myw2NT
 Q1NzIzNjYsMTQxOTc0ODE4Myw3MDY1MDQ5MzYsMjI1MjU0ODQy
 LDE2MjMwOTU4NjMsNzE0NjQ3NDU5LC00MzIzMzY4NzJdfQ==
 -->
