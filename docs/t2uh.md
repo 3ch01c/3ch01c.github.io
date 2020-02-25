@@ -19,8 +19,15 @@ Move into the project directory.
 cd mt7610u_wifi_sta_v3002_dpo_20130916
 ```
 
-Make the projec
+Build the driver.
+
+```sh
+make
+make install
+```
+
+
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTI3NDc2NDFdfQ==
+eyJoaXN0b3J5IjpbLTQzMjMzNjg3Ml19
 -->
