@@ -11,7 +11,7 @@ Install the latest kernel headers.
 
 ```sh
 git clone https://github.com/raspberrypi/firmware --branch $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
-
+git clone https://github.com/raspberrypi/linux.git --branch 
 ```
 
 Clone the [mt7610u_wifi_sta_v3002_dpo_20130916](https://github.com/chenhaiq/mt7610u_wifi_sta_v3002_dpo_20130916) project.
@@ -36,6 +36,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzA2NTA0OTM2LDIyNTI1NDg0MiwxNjIzMD
-k1ODYzLDcxNDY0NzQ1OSwtNDMyMzM2ODcyXX0=
+eyJoaXN0b3J5IjpbMTQxOTc0ODE4Myw3MDY1MDQ5MzYsMjI1Mj
+U0ODQyLDE2MjMwOTU4NjMsNzE0NjQ3NDU5LC00MzIzMzY4NzJd
+fQ==
 -->
