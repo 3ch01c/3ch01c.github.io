@@ -11,6 +11,7 @@ Install the kernel headers for your system.
 
 ```sh
 git clone https://github.com/raspberrypi/firmware --branch $(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
+sudo rpi-update 
 git clone https://github.com/raspberrypi/linux.git --branch $(cat firmware/extra/git_hash)
 ```
 
@@ -36,7 +37,7 @@ make install
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDgwODQ5OTMsNjU0NTcyMzY2LDE0MT
-k3NDgxODMsNzA2NTA0OTM2LDIyNTI1NDg0MiwxNjIzMDk1ODYz
-LDcxNDY0NzQ1OSwtNDMyMzM2ODcyXX0=
+eyJoaXN0b3J5IjpbMTYzMTMwMjAyNywtMjEwODA4NDk5Myw2NT
+Q1NzIzNjYsMTQxOTc0ODE4Myw3MDY1MDQ5MzYsMjI1MjU0ODQy
+LDE2MjMwOTU4NjMsNzE0NjQ3NDU5LC00MzIzMzY4NzJdfQ==
 -->
