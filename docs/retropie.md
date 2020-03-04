@@ -15,6 +15,6 @@ sudo ./retropie_setup.sh
 Optional: Enable TFT display.
 
 ```sh
-curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/pitft-fbcp.sh >pitft-fbcp.sh
-sudo bash pitft-fbcp.sh
+curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh >pitft.sh
+sudo bash pitft.sh
 ```
