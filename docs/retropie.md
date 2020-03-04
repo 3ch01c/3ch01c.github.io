@@ -18,3 +18,7 @@ Optional: Enable TFT display.
 curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh >pitft.sh
 sudo bash pitft.sh
 ```
+
+## References
+
+https://github.com/RetroPie/RetroPie-Setup/wiki/Manual-Installation
