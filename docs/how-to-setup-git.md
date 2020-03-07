@@ -79,7 +79,7 @@ If the key looks bad, refer to [how to sign your commits](#gpg). If the key look
 export GPG_TTY=$(tty)
 ```
 
-If that osn or coiguignour it se the correct GPG program. Maybe it's `gpg` or maybe it's `gpg2` or maybe it's something else.
+If that doesn't work, try setting the GPG program. Maybe it's `gpg` or maybe it's `gpg2` or maybe it's something else.
 
 ```sh
 GPG_PROGRAM="gpg"
