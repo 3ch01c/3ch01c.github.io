@@ -1,6 +1,19 @@
 # How to set up Amazon Fire HD10
 
-## CAUTION
+- [Set up your computer](#set-up-your-computer)
+- [Set up the tablet](#set-up-the-tablet)
+- [Install NoRoot Firewall](#install-noroot-firewall)
+- [Root the tablet](#root-the-tablet)
+- [Install Xposed](#install-xposed)
+- [Install FlashFire](#install-flashfire)
+- [Install Google Play Store](#install-google-play-store)
+- [Remove bloatware](#remove-bloatware)
+- [Restore stock ROM](#restore-stock-rom)
+- [Troubleshooting](#troubleshooting)
+  - [Root exploit failed](#root-exploit-failed)
+- [Need more help](#need-more-help)
+
+## CAUTION <!-- omit in toc -->
 
 This process could **permanently break** your device. You are solely responsible
 for your actions if you choose to use these instructions. SHA256 checksums
@@ -51,7 +64,12 @@ device. You can create a firewall to block updates.
 2. Open up _NoRoot Firewall_ app on the tablet, tap _Start_ to start the
    firewall, check _Auto start on boot_, tap the _Apps_ tab, and X both boxes
    next to _DeviceSoftwareOTA_ to block it from network access.
-3. You can now connect to the internet without getting system updates.
+3. You can now connect to the internet without getting system updates. If you
+   want to know more about other apps trying to access the internet, here's a
+   [spreadsheet](https://docs.google.com/spreadsheets/d/19KAt3uzWB-13F9utW56ITkZaPBNIYF_jYl2tvQV0hrc/edit#gid=1706489423)
+([alternate
+link](https://docs.google.com/spreadsheets/d/1uvY3wJ5cVOGndEKtn96Q51ynIBjLjMHx_NnXWLbxrF0/edit?usp=sharing))
+   with more information about Amazon apps.
 
 ## Root the tablet
 
@@ -187,7 +205,11 @@ you can [restore stock ROM](#restore-stock-rom).
 
 ## Install Xposed
 
-_Adapted from [tkdfriend's XDA post](https://forum.xda-developers.com/hd8-hd10/general/xposed-framework-fire-hd-8-6th-t3549043)_
+_Adapted from [tkdfriend's XDA
+post](https://forum.xda-developers.com/hd8-hd10/general/xposed-framework-fire-hd-8-6th-t3549043)_
+
+Xposed framework has a lot of nifty plugins for controlling the system at a low
+level. I use to disable ads and block access to private information.
 
 1. On your computer, download and install [Xposed
    Installer](https://forum.xda-developers.com/devdb/project/dl/?id=30660&task=get)
@@ -256,7 +278,10 @@ _Adapted from [tkdfriend's XDA post](https://forum.xda-developers.com/hd8-hd10/g
 
 ## Install FlashFire
 
-This process requires root, Xposed, and Xposed module _Per App Hacking_.
+FlashFire is used to flash new firmware. I don't usually install this, which
+means this section is not well tested. **Use at your own risk ever more than the
+rest of this document.** This process requires root, Xposed, and Xposed module
+_Per App Hacking_.
 
 1. Download and install [FlashFire
    v0.24](https://forum.xda-developers.com/attachment.php?attachmentid=4517344&d=1528041165)
@@ -286,6 +311,7 @@ This process requires root, Xposed, and Xposed module _Per App Hacking_.
    ```
 
 4. Reboot the tablet.
+5. Now you should be able to use the app.
 
 ## Install Google Play Store
 
