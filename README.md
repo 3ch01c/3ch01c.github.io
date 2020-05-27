@@ -35,7 +35,4 @@ Sometimes I plan to blog or something here, but then it just comes out as notes.
 - [How to add metadata to media files](docs/how-to-add-metadata-to-media-files.md)
 - [How to set up RetroPie](docs/retropie.md)
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjY3MTI4NDYsLTE4MTA0MDgzMzYsNT
-UwMzYzNTE5XX0=
--->
+![BOINC Stats](https://www.boincstats.com/signature/-1/user/73865533687/sig.png)
