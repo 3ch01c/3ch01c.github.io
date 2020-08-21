@@ -1,22 +1,19 @@
-# Pick a Docker version: test or get (i.e., stable).
-DOCKER_VERSION="test" # or "get" if you're scared
+#!/bin/bash
+# Install Docker, docker-compose, and add the current user to the docker group.
 
-# Download and run the Docker installer script.
+DOCKER_VERSION="get" # or "test" for latest
+DOCKER_COMPOSE_VERSION="1.26.2" # or "1.27.0-rc1" for latest
+
+# Install docker
 curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 
-# Pick a version of docker-compose from the releases.
-DOCKER_COMPOSE_VERSION="1.25.0-rc2" # or "1.24.1" if you're scared
-
-# Download docker-compose.
+# Install docker-compose
 sudo curl -fsSL "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Make docker-compose executable.
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Add the user to the docker group.
-sudo adduser $(whoami) docker
-
-# Set primary group to docker. (Or log out and back in.)
+# Add user to docker group
+sudo usermod -aG docker $(whoami)
+# Make docker the user's current group (so they don't have to logout and back in)
 newgrp docker
 
 # Test some docker commands.
