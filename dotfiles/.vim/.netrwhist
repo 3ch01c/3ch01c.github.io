@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/james/.ssh/ponyville'
+let g:netrw_dirhist_2='/Users/james/projects/3ch01c/utils'
+let g:netrw_dirhist_1='/Users/james/.ssh/personal'
