@@ -15,7 +15,7 @@ curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
 
 ```sh
-DOCKER_COMPOSE_VERSION="1.26.0-rc2" # or 1.25.4
+DOCKER_COMPOSE_VERSION="1.27.4"
 ```
 
 Download `docker-compose`.
