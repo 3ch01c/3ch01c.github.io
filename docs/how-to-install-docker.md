@@ -12,7 +12,7 @@ Download and run the Docker installer script.
 curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 ```
 
-Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
+If you're using a Raspberry Pi or other ARM-based computer, [skip to the RPi section](#rpi). Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
 
 ```sh
 DOCKER_COMPOSE_VERSION="1.27.4"
@@ -63,8 +63,8 @@ Instead of installing the pre-built `docker-compose` binary, install it with `pi
 
 ```sh
 sudo apt update
-sudo apt install -y python python-pip libffi-dev python-backports.ssl-match-hostname
-sudo pip install docker-compose
+sudo apt install -y python3 python3-pip libffi-dev python-backports.ssl-match-hostname
+sudo pip3 install docker-compose
 ```
 
 ## References
