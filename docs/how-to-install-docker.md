@@ -54,7 +54,7 @@ docker run hello-world
 The above instructions are summarized in the following script.
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/3ch01c/utils/master/install_docker.sh | sh -
+curl -fsSL https://raw.githubusercontent.com/3ch01c/3ch01c.github.io/master/scripts/install_docker.sh | sh -
 ```
 
 ## If you're using Raspberry Pi...
