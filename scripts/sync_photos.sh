@@ -20,12 +20,13 @@ while [[ $# -gt 1 ]]; do
 		-h|--help) printHelp ;;
     -v|--verbose) VERBOSE=1 ;;
     --delete) DELETE=1 ;;
+    --debug) DEBUG=1 ;;
 		*) SRC_ROOT="$1"; DST_ROOT="$2"
 	esac
 	shift
 done
 
-if [ ! -z ${VERBOSE+x} ]; then echo find "$SRC_ROOT" -regextype posix-extended -iregex "$IMG_REGEX"; fi
+if [ ! -z ${DEBUG+x} ]; then echo find "$SRC_ROOT" -regextype posix-extended -iregex "$IMG_REGEX"; fi
 while IFS= read -r IMG
 do
   # https://video.stackexchange.com/questions/7145/capture-date-for-video
@@ -38,9 +39,9 @@ do
   CMONTH=$(date -d"$CTIME" +%m)
   CDAY=$(date -d"$CTIME" +%d)
   DST="$DST_ROOT/$CYEAR/$CMONTH/${CTIME}/"
-  echo "$IMG: $DST"
   FLAGS="-az"
   if [ ! -z ${VERBOSE+x} ]; then FLAGS+=" -P"; fi
   if [ ! -z ${DELETE+x} ]; then FLAGS+=" --remove-source-files"; fi
+  if [ ! -z ${DEBUG+x} ]; then echo rsync $FLAGS "$IMG" "$DST"; fi
   rsync $FLAGS "$IMG" "$DST"
 done <<< $(find "$SRC_ROOT" -regextype posix-extended -iregex "$IMG_REGEX")
