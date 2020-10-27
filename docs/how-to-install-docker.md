@@ -105,10 +105,5 @@ docker version
 
 ## References
 
-[https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html)
-[https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/](https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/)
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwMjUyNTQ4MCw2ODQxNjE2MzYsLTc4ND
-QyMDkwNywtMTI1ODkxMzAyMSwxMDg3NTUwMDMyXX0=
--->
+* [https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html)
+* [https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/](https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/)
