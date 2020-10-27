@@ -86,12 +86,13 @@ Restart the daemon.
 sudo systemctl restart docker
 ```
 
-Add the `"experimental": enabled` key to the client configuration in `$HOME/.docker/config.json`. If this file doesn't already exist, you can use the following to create it:
+Add the `"experimental": "enabled"` key to the client configuration in `$HOME/.docker/config.json`. If this file doesn't already exist, you can use the following to create it:
 
 ```sh
-sudo tee $HOME/.docker/config.json <<EOF
+mkdir $HOME/.docker
+tee $HOME/.docker/config.json <<EOF
 {
-  "experimental": enabled
+  "experimental": "enabled"
 }
 EOF
 ```
