@@ -68,9 +68,9 @@ sudo apt install -y python3 python3-pip libffi-dev python-backports.ssl-match-ho
 sudo pip3 install docker-compose
 ```
 
-## Enable experiemntal features
+## Enable experimental features
 
-Add the `experimental: true` key to the configuration in `/etc/docker/daemon.json`.
+Add the `"experimental": true` key to the server configuration in `/etc/docker/daemon.json`. If this file doesn't already exist, you can use the following to create it:
 
 ```sh
 sudo tee /etc/docker/daemon.json <<EOF
@@ -79,9 +79,33 @@ sudo tee /etc/docker/daemon.json <<EOF
 }
 EOF
 ```
+
+Restart the daemon.
+
+```sh
+sudo systemctl restart docker
+```
+
+Add the `"experimental": enabled` key to the client configuration in `$HOME/.docker/config.json`. If this file doesn't already exist, you can use the following to create it:
+
+```sh
+sudo tee $HOME/.docker/config.json <<EOF
+{
+  "experimental": enabled
+}
+EOF
+```
+
+Check experimental features are enabled for both the server and client.
+
+```sh
+docker version
+```
+
 ## References
 
 [https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html)
+[https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/](https://thenewstack.io/how-to-enable-docker-experimental-features-and-encrypt-your-login-credentials/)
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTQwMjUyNTQ4MCw2ODQxNjE2MzYsLTc4ND
