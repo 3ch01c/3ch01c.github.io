@@ -57,7 +57,8 @@ The above instructions are summarized in the following script.
 curl -fsSL https://raw.githubusercontent.com/3ch01c/3ch01c.github.io/master/scripts/install_docker.sh | sh -
 ```
 
-## If you're using Raspberry Pi...
+<a name="rpi"></a>
+## Install `docker-compose` on Raspberry Pi (or other ARM device)
 
 Instead of installing the pre-built `docker-compose` binary, install it with `pip`.
 
@@ -67,6 +68,17 @@ sudo apt install -y python3 python3-pip libffi-dev python-backports.ssl-match-ho
 sudo pip3 install docker-compose
 ```
 
+## Enable experiemntal features
+
+Add the `experimental: true` key to the configuration in `/etc/docker/daemon.json`.
+
+```sh
+sudo tee /etc/docker/daemon.json <<EOF
+{
+  "experimental": true
+}
+EOF
+```
 ## References
 
 [https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html)
