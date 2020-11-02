@@ -52,36 +52,36 @@
 
 ## Set up automatic updates
 
-Install dependencies.
+1. Install dependencies.
 
-```sh
-sudo apt install unattended-upgrades
-```
+   ```sh
+   sudo apt install unattended-upgrades
+   ```
 
-Uncomment and edit the following lines in `/etc/apt/apt.conf.d/50unattended-upgrades`:
+1. Uncomment and edit the following lines in `/etc/apt/apt.conf.d/50unattended-upgrades`:
 
-```sh
-sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades <<EOF
-"${distro_id}:${distro_codename}-updates";
-Unattended-Upgrade::Mail "<YOUR_EMAIL_HERE>";
-Unattended-Upgrade::MailReport "only-on-error";
-Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
-Unattended-Upgrade::Remove-Unused-Dependencies "true";
-Unattended-Upgrade::Automatic-Reboot "true";
-Unattended-Upgrade::Automatic-Reboot-Time "02:00";
-EOF
-```
+   ```sh
+   sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades <<EOF
+   "${distro_id}:${distro_codename}-updates";
+   Unattended-Upgrade::Mail "<YOUR_EMAIL_HERE>";
+   Unattended-Upgrade::MailReport "only-on-error";
+   Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+   Unattended-Upgrade::Remove-Unused-Dependencies "true";
+   Unattended-Upgrade::Automatic-Reboot "true";
+   Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+   EOF
+   ```
 
-Enable and set interval for automatic updates:
+1. Enable and set interval for automatic updates:
 
-```sh
-sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades <<EOF
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Download-Upgradeable-Packages "1";
-APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
-EOF
-```
+   ```sh
+   sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades <<EOF
+   APT::Periodic::Update-Package-Lists "1";
+   APT::Periodic::Download-Upgradeable-Packages "1";
+   APT::Periodic::AutocleanInterval "7";
+   APT::Periodic::Unattended-Upgrade "1";
+   EOF
+   ```
 
 # References
 
