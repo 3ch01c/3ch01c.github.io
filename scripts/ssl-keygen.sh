@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This script creates an OpenSSL private key, certificate signing request, and self-signed certificate.
 # You must supply a at least a Common Name argument (e.g., example.com) or else include it in your config file.
 
@@ -20,7 +20,7 @@ while [[ $# -gt 0 ]]; do
 	case $key in
 		-h|--help) printHelp ;;
 		-c|--config) CONFIG=$2; shift ;;
-    -v|--verbose) VERBOSE=1; shift ;;
+    -v|--verbose) VERBOSE=1 ;;
 		*) CN=$1
 	esac
 	shift
@@ -29,7 +29,8 @@ done
 if [ ! -z ${VERBOSE+x} ]; then echo "Generating private key and certificate signing request..."; fi
 if [ -z ${CONFIG+x} ]; then
 	# Use default config
-	openssl req -noout -newkey rsa:2048 -nodes -sha256 -keyout $CN.key -out $CN.csr -subj /CN=$CN
+	echo openssl req -noout -newkey rsa:2048 -nodes -sha256 -keyout $CN.key -out $CN.csr -subj /CN=$CN
+	openssl req -newkey rsa:2048 -nodes -sha256 -keyout $CN.key -out $CN.csr -subj /CN=$CN
 else
 	# Use custom config file
 	openssl req -noout -newkey rsa:2048 -nodes -sha256 -keyout $CN.key -out $CN.csr -config $CONFIG
