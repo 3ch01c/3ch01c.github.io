@@ -1,4 +1,4 @@
-# How to setup diskless Ubuntu Kubernetes cluster
+# How to setup diskless Ubuntu cluster
 
 ## Set up the image server
 
