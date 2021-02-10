@@ -61,11 +61,11 @@ if [ ! -z ${no_proxy+x} ]; then
   # Used by the minikube VM. Configurable for some hypervisors via --host-only-cidr
   else no_proxy=$no_proxy,192.168.99.0/24; fi
   # Used by service cluster IP’s. Configurable via --service-cluster-ip-range
-  no_proxy=$no_proxy,10.96.0.0/12
-  msg_info "* Add Kuberntes service IPs to no_proxy and NO_PROXY environment variables. To set them in your environment, source this script or run the following commands:"
-  msg_info "  export no_proxy=$no_proxy,192.168.99.0/24,192.168.39.0/24,192.168.49.0/24,10.96.0.0/12"
+  no_proxy=$no_proxy,10.96.0.0/12,$(minikube ip)
+  msg_info "* Add Kubernetes service IPs to no_proxy and NO_PROXY environment variables. To set them in your environment, source this script or run the following commands:"
+  msg_info "  export no_proxy=$no_proxy"
   msg_info "  export NO_PROXY=$no_proxy"
-  export no_proxy=$no_proxy,$(minikube ip)
+  export no_proxy=$no_proxy
   export NO_PROXY=$no_proxy
 fi
 msg_info "* Set Docker environment variables. To set them in your environment, source this script or run the following command:"
@@ -95,6 +95,6 @@ msg_info "* Set Docker environment variables:"
 msg_info '    eval $(minikube docker-env)'
 if [ ! -z ${no_proxy+x} ]; then
   msg_info "* Add Minikube IP to no_proxy and NO_PROXY environment variables:"
-  msg_info '    export no_proxy=$no_proxy,$(minikube ip)'
-  msg_info '    export NO_PROXY=$no_proxy'
+  msg_info "    export no_proxy=$no_proxy,$(minikube ip)"
+  msg_info "    export NO_PROXY=$no_proxy"
 fi
