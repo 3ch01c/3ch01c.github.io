@@ -170,7 +170,7 @@ sudo apt autoremove
 Add `stable` repo.
 
 ```sh
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo add stable https://charts.helm.sh/stable
 ```
 
 <!--
