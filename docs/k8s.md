@@ -23,35 +23,74 @@ You'll need some container runtime such as Docker, containerd, etc.
 
 ##### Docker
 
-Install Docker.
+Install [Docker](https://docs.docker.com/engine/install/ubuntu/).
 
 ```sh
 # On Ubuntu
-RELEASE=$(lsb_release -cs)
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable"
-sudo apt update
-sudo apt install -y "docker-ce=5:19.03.12~3-0~ubuntu-$RELEASE"
+sudo apt-key fingerprint 0EBFCD88
+# If using 64-bit Arm, change arch=arm64. armhf no longer supported in Ubuntu 20.04.
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+It's recommended to pin package versions.
+
+```sh
+sudo apt-mark hold docker-ce docker-ce-cli containerd.io
+```
+
+Test Docker works.
+
+```sh
+sudo docker run hello-world
 ```
 
 #### K8s tools
 
 ##### Vanilla K8s
 
-Every node needs `kubelet`. The master node(s) also need `kubeadm` and `kubectl`.
+Allow iptables to see bridged traffic.
+
+```sh
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+```
+
+Every node needs `kubelet`. Master nodes also need [`kubeadm`](#https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/) and `kubectl`.
 
 ```sh
 # On Ubuntu
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-sudo apt-add-repository "deb https://apt.kubernetes.io/ kubernetes-xenial main"
-sudo apt update
-sudo apt install -y "kubelet=1.17.8-00" "kubeadm=1.17.8-00" "kubectl=1.17.8-00"
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
 ```
 
 It's recommended to pin package versions.
 
 ```sh
-sudo apt-mark hold docker-ce kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ##### Other K8s Flavors
@@ -61,14 +100,17 @@ ease-of-install rather than fully featured production deployments.
 
 ### Set up a cluster with `kubeadm`
 
-Initialize the cluster.
+Initialize the [control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/). The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
+
+* Make sure the `--pod-network-cidr` doesn't conflict with your LAN network (e.g., if you're already using 192.168.0.0/16 for your host LAN, use 10.0.0.0/16 or something else that's available). You might need to use a specific pod network CIDR depending on your [pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
+* The `--apiserver-advertise-address` is only required if your cluster communicates with this node's API server on a different interface than the default gateway.
+* The `--control-plane-endpoint` is only required if you're going to set up a high-availability cluster and should point to the address of a control plane load balancer.
 
 ```sh
-POD_NETWORK_CIDR=192.168.0.0/16
-sudo kubeadm init --pod-network-cidr $POD_NETWORK_CIDR
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address=172.31.27.0 --control-plane-endpoint k8s-example-1234567890.us-west-1.elb.amazonaws.com
 ```
 
-Add local config.
+After initialization completes, copy the cluster configuration to your local account so you can communicate with the cluster, and save the `kubeadm join` command from the output which you'll need to join worker nodes to your cluster. (If you don't save the join command, you can generate a new token with `kubeadm token create --print-join-command`.)
 
 ```sh
 mkdir -p $HOME/.kube
@@ -76,13 +118,20 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-Deploy Calico (or some other networking overlay).
+Now, you can use `kubectl`.
 
 ```sh
-kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+kubectl get pods -n kube-system
 ```
 
-Wait for system pods to be running.
+You might notice some pods in `Pending` status because you need to deploy a pod network add-on like [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart).
+
+```sh
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+```
+
+Wait for system pods to be in 'Running' state.
 
 ```sh
 watch kubectl get pods -n kube-system
