@@ -267,7 +267,8 @@ kubectl port-forward $(kubectl get pods -lapp=prometheus -ojsonpath='{range .ite
 Deploy Grafana.
 
 ```sh
-helm install --generate-name stable/grafana
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install --generate-name grafana
 ```
 
 Get Grafana admin credentials.
