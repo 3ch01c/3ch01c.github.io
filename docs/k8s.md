@@ -124,7 +124,7 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 
 ## Nvidia
 
-Add the `[NVIDIA/gpu-operator](https://github.com/NVIDIA/gpu-operator)` repository.
+Add the [NVIDIA/gpu-operator](https://github.com/NVIDIA/gpu-operator) repository.
 
 ```sh
 helm repo add nvidia https://nvidia.github.io/gpu-operator
