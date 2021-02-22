@@ -88,6 +88,18 @@ Wait for system pods to be running.
 watch kubectl get pods -n kube-system
 ```
 
+If the calico node doesn't start up, check the logs.
+
+```sh
+kubectl get logs -f calico-node-75n2n -n kube-system
+```
+
+You might need to disable loose RPF.
+
+```sh
+sudo sysctl -w net.ipv4.conf.all.rp_filter=0
+```
+
 If you're running a single-node cluster, untaint master node so it's available for scheduling.
 
 ```sh
