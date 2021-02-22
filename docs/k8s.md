@@ -143,6 +143,26 @@ Check all the pods are running.
 kubectl get pods -A
 ```
 
+If you get a `CrashLoopBackOff` with the `nvidia-driver-daemonset` pod, check the logs.
+
+```
+kubectl logs -f nvidia-driver-daemonset-k5mh2 -n gpu-operator-resources
+```
+
+If there's an error `Could not unload NVIDIA driver kernel modules, driver is in use`, try unloading the Nvidia module on the host.
+
+```sh
+sudo systemctl isolate multi-user.target
+sudo modprobe -r nvidia-drm
+```
+
+If that doesn't work, try uninstalling the driver.
+
+```sh
+sudo apt remove nvidia-driver-450
+sudo apt autoremove
+```
+
 ### GPU Monitoring
 
 [Original documentation](https://github.com/NVIDIA/gpu-operator#gpu-monitoring)
