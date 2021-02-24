@@ -95,8 +95,19 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ##### Other K8s Flavors
 
-Minikube, microk8s, and kind are some other options which focus on
-ease-of-install rather than fully featured production deployments.
+[Docker Desktop](https://www.docker.com/products/docker-desktop) is a popular choice for developers.
+
+[Minikube](https://minikube.sigs.k8s.io/docs/) is single-node Kubernetes in a virtual machine. I recommend this because [Docker for Mac doesn't honor `NO_PROXY` environment variables](https://github.com/docker/for-mac/issues/2732), but you might not use proxies, you lucky dog.
+
+[k3s](https://k3s.io/) is a lightweight Kubernetes distribution optimized for Raspberry Pis and other low-end computing hardware. It removes a lot of features you probably don't use making it extremely efficient.
+
+[microk8s](https://microk8s.io/) is an Ubuntu-based lightweight Kubernetes distribution.
+
+[kind](https://kind.sigs.k8s.io/) stands for "Kubernetes in Docker". One advantage over Minikube is that you can run multi-node clusters, but it requires Docker to be installed on the host. [Until recently](https://www.tcg.com/blog/yes-you-can-run-docker-and-virtualbox-on-windows-10-home/), VirtualBox doesn't play well with Docker on Windows so that's why I don't use it.
+
+[Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) / [Elastic Kubernetes Service(EKS)](https://aws.amazon.com/eks/) / [Azure Kubernetes Service (AKS)](https://azure.microsoft.com/en-us/services/kubernetes-service/) are some of the major cloud versions of Kubernetes. They make it easy to use K8s without the all the infrastructure setup. In theory, at least.
+
+[OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift) is Red Hat's enterprise Kubernetes platform. This might also be easier to use if you don't mind ponying up the bills.
 
 ### Set up a cluster with `kubeadm`
 
@@ -140,7 +151,7 @@ watch kubectl get pods -n kube-system
 If the calico node doesn't start up, check the logs.
 
 ```sh
-kubectl get logs -f calico-node-75n2n -n kube-system
+kubectl logs -f calico-node-75n2n -n kube-system
 ```
 
 You might need to disable loose RPF.
@@ -149,7 +160,7 @@ You might need to disable loose RPF.
 sudo sysctl -w net.ipv4.conf.all.rp_filter=0
 ```
 
-If you're running a single-node cluster, untaint master node so it's available for scheduling.
+If you're running a single-node cluster, untaint the master node so it's available for scheduling.
 
 ```sh
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -164,7 +175,7 @@ kubectl get nodes -o wide
 See all resources available in your cluster.
 
 ```sh
-kubectl get all -A
+kubectl get all -A -o wide
 ```
 
 ## Helm
@@ -243,21 +254,13 @@ If you get a `CrashLoopBackOff` with the `nvidia-driver-daemonset` pod, check th
 kubectl logs -f nvidia-driver-daemonset-k5mh2 -n gpu-operator-resources
 ```
 
-If there's an error `Could not unload NVIDIA driver kernel modules, driver is in use`, try unloading the Nvidia module on the host.
+If there's an error `Could not unload NVIDIA driver kernel modules, driver is in use`, you probably need to reboot the node.
 
 ```sh
-sudo systemctl isolate multi-user.target
-sudo modprobe -r nvidia-drm
+sudo reboot
 ```
 
-If that doesn't work, try uninstalling the driver.
-
-```sh
-sudo apt remove nvidia-driver-450
-sudo apt autoremove
-```
-
-If you ever uninstall the GPU operator, *you must reboot the node*.
+If you ever uninstall the GPU operator, *you must reboot the node to unload the GPU drivers*.
 
 ```
 helm uninstall nvidia/gpu-operator
