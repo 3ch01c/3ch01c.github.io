@@ -173,6 +173,20 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 
 ## Nvidia
 
+### Prerequisites
+
+If using Ubuntu 18.04 or later, disable the `nouveau` driver.
+
+```sh
+sudo cat << EOF > /etc/modprobe.d/blacklist-nouveau.conf
+blacklist nouveau
+options nouveau modeset=0
+EOF
+sudo update-initramfs -u
+```
+
+### Installation
+
 Add the [NVIDIA/gpu-operator](https://github.com/NVIDIA/gpu-operator) repository.
 
 ```sh
