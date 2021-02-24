@@ -114,14 +114,16 @@ sudo apt-mark hold kubelet kubeadm kubectl
 Initialize the [control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/). The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
 
 * Make sure the `--pod-network-cidr` doesn't conflict with your LAN network (e.g., if you're already using 192.168.0.0/16 for your host LAN, use 10.0.0.0/16 or something else that's available). You might need to use a specific pod network CIDR depending on your [pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
-* The `--apiserver-advertise-address` is only required if your cluster communicates with this node's API server on a different interface than the default gateway.
-* The `--control-plane-endpoint` is only required if you're going to set up a high-availability cluster and should point to the address of a control plane load balancer.
+* The `--apiserver-advertise-address` is the IP address of the interfaces your API server communicates on. It defaults to the interface of the default gateway.
+* If you're setting up a high-availability cluster, the `--control-plane-endpoint` is the address of the control plane load balancer.
 
 ```sh
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address=172.31.27.0 --control-plane-endpoint k8s-example-1234567890.us-west-1.elb.amazonaws.com
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 # single-node default
+# sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address=172.31.27.0 # single-node non-default interface
+# sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --control-plane-endpoint k8s-example-1234567890.us-west-1.elb.amazonaws.com # ha cluster
 ```
 
-After initialization completes, copy the cluster configuration to your local account so you can communicate with the cluster, and save the `kubeadm join` command from the output which you'll need to join worker nodes to your cluster. (If you don't save the join command, you can generate a new token with `kubeadm token create --print-join-command`.)
+After initialization completes, copy the cluster configuration to your local account so you can communicate with the cluster.
 
 ```sh
 mkdir -p $HOME/.kube
@@ -129,10 +131,16 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+You also need to save the `kubeadm join` command from the output in order to join worker nodes to your cluster. If you forget to save the join command, you can generate a new one.
+
+```sh
+kubeadm token create --print-join-command > join.sh && chmod +x join.sh
+```
+
 Now, you can use `kubectl`.
 
 ```sh
-kubectl get pods -n kube-system
+kubectl get pods -A
 ```
 
 You might notice some pods in `Pending` status because you need to deploy a pod network add-on like [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart).
@@ -142,22 +150,22 @@ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
 
-Wait for system pods to be in 'Running' state.
+Watch the pods until they're all in the 'Running' state.
 
 ```sh
-watch kubectl get pods -n kube-system
+watch kubectl get pods -A
 ```
 
-If the calico node doesn't start up, check the logs.
+If the `calico-node` pod is failing with a `CrashLoopBack` state, check its logs.
 
 ```sh
 kubectl logs -f calico-node-75n2n -n kube-system
 ```
 
-You might need to disable loose RPF.
+If you see an error `Kernel's RPF check is set to 'loose'.`, you can change disable the check by setting the environment variable `IgnoreLooseRPF` to `true` in the `calico-node` [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). (Thanks [Alex](https://alexbrand.dev/post/creating-a-kind-cluster-with-calico-networking/)!)
 
 ```sh
-sudo sysctl -w net.ipv4.conf.all.rp_filter=0
+kubectl -n kube-system set env daemonset/calico-node FELIX_IGNORELOOSERPF=true
 ```
 
 If you're running a single-node cluster, untaint the master node so it's available for scheduling.
@@ -172,7 +180,7 @@ Check nodes are available.
 kubectl get nodes -o wide
 ```
 
-See all resources available in your cluster.
+See all resources in your cluster.
 
 ```sh
 kubectl get all -A -o wide
