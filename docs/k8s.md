@@ -161,6 +161,12 @@ Check nodes are available.
 kubectl get nodes -o wide
 ```
 
+See all resources available in your cluster.
+
+```sh
+kubectl get all -A
+```
+
 ## Helm
 
 [Official installation documentation](https://helm.sh/docs/intro/install/)
@@ -173,7 +179,27 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 
 ## Nvidia
 
-### Prerequisites
+[Official installation guide](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide)
+
+Uninstall pre-existing Nvidia drivers.
+
+```sh
+# On Ubuntu
+sudo apt remove nvidia-driver-450
+sudo apt autoremove
+```
+
+Load `i2c_core` and `ipmi_msghandler` modules.
+
+```sh
+sudo modprobe -a i2c_core ipmi_msghandler
+```
+
+Make sure a container runtime (e.g., [Docker](#docker)) is installed.
+
+```sh
+docker version
+```
 
 If using Ubuntu 18.04 or later, disable the `nouveau` driver.
 
@@ -185,8 +211,6 @@ EOF
 sudo update-initramfs -u
 ```
 
-### Installation
-
 Add the [NVIDIA/gpu-operator](https://github.com/NVIDIA/gpu-operator) repository.
 
 ```sh
@@ -194,10 +218,17 @@ helm repo add nvidia https://nvidia.github.io/gpu-operator
 helm repo update
 ```
 
-Install `nvidia/gpu-operator`.
+Check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-feature-discovery) is already enabled.
 
 ```sh
-helm install gpu-operator nvidia/gpu-operator
+kubectl -n node-feature-discovery get all
+```
+
+Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
+
+```sh
+helm install --wait gpu-operator nvidia/gpu-operator # if NFD isn't enabled
+# helm install --wait --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
 ```
 
 Check all the pods are running.
@@ -224,6 +255,13 @@ If that doesn't work, try uninstalling the driver.
 ```sh
 sudo apt remove nvidia-driver-450
 sudo apt autoremove
+```
+
+If you ever uninstall the GPU operator, *you must reboot the node*.
+
+```
+helm uninstall nvidia/gpu-operator
+sudo reboot
 ```
 
 ### GPU Monitoring
