@@ -194,6 +194,7 @@ Download and run the install script.
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash -
+helm init --client-only
 ```
 
 ## Nvidia
