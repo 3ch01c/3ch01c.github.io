@@ -9,6 +9,8 @@
       - [Other K8s Flavors](#other-k8s-flavors)
   - [Set up a cluster with `kubeadm`](#set-up-a-cluster-with-kubeadm)
 - [Helm](#helm)
+- [Monitoring](#monitoring)
+  - [Prometheus](#prometheus)
 - [Nvidia](#nvidia)
   - [GPU Monitoring](#gpu-monitoring)
 - [High Availability](#high-availability)
@@ -197,6 +199,32 @@ curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 helm init --client-only
 ```
 
+## Monitoring
+
+### Prometheus
+
+Deploy the `kube-prometheus` stack.
+
+```sh
+git clone https://github.com/prometheus-operator/kube-prometheus.git
+cd kube-prometheus
+kubectl create -f manifests/setup
+until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+kubectl create -f manifests/
+```
+
+Access the Grafana dashboard by setting up a port-forward then accessing from your browser at http://localhost:3000.
+
+```sh
+kubectl --namespace monitoring port-forward svc/grafana 3000
+```
+
+To remove `kube-prometheus`:
+
+```sh
+kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+```
+
 ## Nvidia
 
 [Official installation guide](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide)
@@ -247,8 +275,8 @@ kubectl -n node-feature-discovery get all
 Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
 
 ```sh
-helm install --wait gpu-operator nvidia/gpu-operator # if NFD isn't enabled
-# helm install --wait --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
+helm install gpu-operator nvidia/gpu-operator # if NFD isn't enabled
+# helm install --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
 ```
 
 Check all the pods are running.
@@ -514,3 +542,17 @@ spec:
 status: {}
 EOF
 ```
+
+## References
+
+- [NVIDIA GPU Operator](https://nvidia.github.io/gpu-operator/)
+- [NVIDIA GPU Operator Install Guide](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#operator-install-guide)
+- [Kubeflow](https://www.kubeflow.org/docs/started/k8s/overview/)
+- [Resource metrics pipeline](https://kubernetes.io/docs/tasks/debug-application-cluster/resource-metrics-pipeline/)
+- [Node Problem Detector](https://github.com/kubernetes/node-problem-detector)
+- [Kubernetes monitoring with Prometheus, the ultimate guide](https://sysdig.com/blog/kubernetes-monitoring-prometheus/)
+- [Traefik](https://github.com/traefik/traefik/blob/master/docs/content/getting-started/install-traefik.md)
+- [Prometheus Operator](https://github.com/prometheus-operator/kube-prometheus)
+- [Nvidia GPU Grafana Dashboard](https://grafana.com/grafana/dashboards/6387)
+- [NVIDIA Prometheus Exporter](https://github.com/BugRoger/nvidia-exporter)
+- [DCGM Exporter](https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter)
