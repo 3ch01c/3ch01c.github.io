@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    10.0.2.15:
+      ansible_user: ubuntu
+      arch: amd64
+      codename: focal
