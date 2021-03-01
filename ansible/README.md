@@ -8,5 +8,5 @@
 
    ```sh
    # Install Docker
-   ansible-playbook docker-playbook.yml
+   ansible-playbook playbooks/install-docker.yml
    ```
