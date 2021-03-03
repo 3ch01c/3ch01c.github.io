@@ -272,11 +272,49 @@ Check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-
 kubectl -n node-feature-discovery get all
 ```
 
+If you're behind a proxy, create a proxy configuration file.
+
+```yaml
+# proxy-vars.yml
+---
+driver:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+toolkit:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+devicePlugin:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+dcgmExporter:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+gfd:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+```
+
 Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
 
 ```sh
 helm install gpu-operator nvidia/gpu-operator # if NFD isn't enabled
 # helm install --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
+# helm install -f proxy-vars.yml gpu-operator nvidia/gpu-operator # if proxy vars are needed
 ```
 
 Check all the pods are running.
@@ -297,7 +335,7 @@ If there's an error `Could not unload NVIDIA driver kernel modules, driver is in
 sudo reboot
 ```
 
-If you ever uninstall the GPU operator, *you must reboot the node to unload the GPU drivers*.
+If you ever need to uninstall/reinstall the GPU operator, reboot the node to finish unloading the GPU drivers.
 
 ```
 helm uninstall nvidia/gpu-operator
