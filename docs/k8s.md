@@ -272,11 +272,13 @@ Check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-
 kubectl -n node-feature-discovery get all
 ```
 
-If you're behind a proxy, create a proxy configuration file.
+Add custom configuration values.
 
 ```yaml
-# proxy-vars.yml
+# values.yml
 ---
+nfd:
+  enabled: true # false if NFD is already enabled
 driver:
   env:
     - name: http_proxy
@@ -296,11 +298,16 @@ devicePlugin:
     - name: https_proxy
       value: http://proxyout.example.com
 dcgmExporter:
+  args:
+    - "-f"
+    - "/etc/dcgm-exporter/default-counters.csv"
   env:
     - name: http_proxy
       value: http://proxyout.example.com
     - name: https_proxy
       value: http://proxyout.example.com
+    - name: NVIDIA_VISIBILE_DEVICES
+      value: "1"
 gfd:
   env:
     - name: http_proxy
@@ -312,9 +319,7 @@ gfd:
 Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
 
 ```sh
-helm install gpu-operator nvidia/gpu-operator # if NFD isn't enabled
-# helm install --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
-# helm install -f proxy-vars.yml gpu-operator nvidia/gpu-operator # if proxy vars are needed
+helm install -f values.yml gpu-operator nvidia/gpu-operator
 ```
 
 Check all the pods are running.
@@ -400,6 +405,16 @@ Open Grafana UI.
 ssh -L 3000:localhost:3000 -i $KEY $USER@$HOST
 open http://localhost:3000
 ```
+
+Optional: Set up port forwarding for dcgm exporter.
+
+```sh
+kubectl port-forward $(kubectl get pods -lapp=nvidia-dcgm-exporter -n gpu-operator-resources -o jsonpath='{.items[0].metadata.name}') -n gpu-operator-resources 9400 &
+```
+
+### kubeflow
+
+
 
 ## High Availability
 
