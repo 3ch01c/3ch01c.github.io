@@ -346,61 +346,7 @@ sudo reboot
 
 [Original documentation](https://github.com/NVIDIA/gpu-operator#gpu-monitoring)
 
-Add `stable` repo.
-
-```sh
-helm repo add stable https://charts.helm.sh/stable
-```
-
-<!--
-Set up a storage class.
-
-```sh
-cat <<EOF | kubectl apply -f -
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
-
-Create persistent volumes. (Thanks [Prabhu Raja Singh](https://www.devopsart.com/2020/06/step-by-step-to-install-prometheus-in.html)!)
-
-```sh
-kubectl apply -f - <<EOF
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: prometheus-alertmanager
-spec:
-  storageClassName:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/prometheus-alertmanager"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: prometheus-server
-spec:
-  storageClassName:
-  capacity:
-    storage: 8Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/prometheus-server"
-EOF
-```
-
--->
-
-Create dcgm-exporter config.
+Create [dcgm-exporter](https://github.com/NVIDIA/gpu-monitoring-tools#dcgm-exporter) config.
 
 ```sh
 tee dcgmScrapeConfig.yaml <<EOF
@@ -422,32 +368,18 @@ tee dcgmScrapeConfig.yaml <<EOF
 EOF
 ```
 
-Deploy [prometheus-operator](https://github.com/helm/charts/tree/master/stable/prometheus-operator)kub.
+Deploy [prometheus-operator](https://github.com/helm/charts/tree/master/stable/prometheus-operator).
 
 ```sh
-helm install --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml --generate-name stable/prometheus-operator
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml --generate-name prometheus-community/kube-prometheus-stack
 ```
 
-<!--
-Deploy Prometheus.
-
-```sh
-helm install --set-file extraScrapeConfigs=./dcgmScrapeConfig.yaml  --set alertmanager.persistentVolume.enabled=false --set server.persistentVolume.enabled=false --generate-name stable/prometheus
-```
-
--->
-
-Set up port forwarding for Prometheus.
+Optional: add port forwarding for Prometheus.
 
 ```sh
 kubectl port-forward $(kubectl get pods -lapp=prometheus -ojsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}') 9090 &
-```
-
-Deploy Grafana.
-
-```sh
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install --generate-name grafana
 ```
 
 Get Grafana admin credentials.
