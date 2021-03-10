@@ -272,11 +272,54 @@ Check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-
 kubectl -n node-feature-discovery get all
 ```
 
+Add custom configuration values.
+
+```yaml
+# values.yml
+---
+nfd:
+  enabled: true # false if NFD is already enabled
+driver:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+toolkit:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+devicePlugin:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+dcgmExporter:
+  args:
+    - "-f"
+    - "/etc/dcgm-exporter/default-counters.csv"
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+    - name: NVIDIA_VISIBILE_DEVICES
+      value: "1"
+gfd:
+  env:
+    - name: http_proxy
+      value: http://proxyout.example.com
+    - name: https_proxy
+      value: http://proxyout.example.com
+```
+
 Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
 
 ```sh
-helm install gpu-operator nvidia/gpu-operator # if NFD isn't enabled
-# helm install --set nfd.enabled=false gpu-operator nvidia/gpu-operator # if NFD is enabled
+helm install -f values.yml gpu-operator nvidia/gpu-operator
 ```
 
 Check all the pods are running.
@@ -297,7 +340,7 @@ If there's an error `Could not unload NVIDIA driver kernel modules, driver is in
 sudo reboot
 ```
 
-If you ever uninstall the GPU operator, *you must reboot the node to unload the GPU drivers*.
+If you ever need to uninstall/reinstall the GPU operator, reboot the node to finish unloading the GPU drivers.
 
 ```
 helm uninstall nvidia/gpu-operator
@@ -308,61 +351,7 @@ sudo reboot
 
 [Original documentation](https://github.com/NVIDIA/gpu-operator#gpu-monitoring)
 
-Add `stable` repo.
-
-```sh
-helm repo add stable https://charts.helm.sh/stable
-```
-
-<!--
-Set up a storage class.
-
-```sh
-cat <<EOF | kubectl apply -f -
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
-
-Create persistent volumes. (Thanks [Prabhu Raja Singh](https://www.devopsart.com/2020/06/step-by-step-to-install-prometheus-in.html)!)
-
-```sh
-kubectl apply -f - <<EOF
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: prometheus-alertmanager
-spec:
-  storageClassName:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/prometheus-alertmanager"
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: prometheus-server
-spec:
-  storageClassName:
-  capacity:
-    storage: 8Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/prometheus-server"
-EOF
-```
-
--->
-
-Create dcgm-exporter config.
+Create [dcgm-exporter](https://github.com/NVIDIA/gpu-monitoring-tools#dcgm-exporter) config.
 
 ```sh
 tee dcgmScrapeConfig.yaml <<EOF
@@ -384,32 +373,18 @@ tee dcgmScrapeConfig.yaml <<EOF
 EOF
 ```
 
-Deploy [prometheus-operator](https://github.com/helm/charts/tree/master/stable/prometheus-operator)kub.
+Deploy [prometheus-operator](https://github.com/helm/charts/tree/master/stable/prometheus-operator).
 
 ```sh
-helm install --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml --generate-name stable/prometheus-operator
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml --generate-name prometheus-community/kube-prometheus-stack
 ```
 
-<!--
-Deploy Prometheus.
-
-```sh
-helm install --set-file extraScrapeConfigs=./dcgmScrapeConfig.yaml  --set alertmanager.persistentVolume.enabled=false --set server.persistentVolume.enabled=false --generate-name stable/prometheus
-```
-
--->
-
-Set up port forwarding for Prometheus.
+Optional: add port forwarding for Prometheus.
 
 ```sh
 kubectl port-forward $(kubectl get pods -lapp=prometheus -ojsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}') 9090 &
-```
-
-Deploy Grafana.
-
-```sh
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install --generate-name grafana
 ```
 
 Get Grafana admin credentials.
@@ -430,6 +405,16 @@ Open Grafana UI.
 ssh -L 3000:localhost:3000 -i $KEY $USER@$HOST
 open http://localhost:3000
 ```
+
+Optional: Set up port forwarding for dcgm exporter.
+
+```sh
+kubectl port-forward $(kubectl get pods -lapp=nvidia-dcgm-exporter -n gpu-operator-resources -o jsonpath='{.items[0].metadata.name}') -n gpu-operator-resources 9400 &
+```
+
+### kubeflow
+
+
 
 ## High Availability
 
