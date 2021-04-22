@@ -568,3 +568,4 @@ kubectl config view --minify
 - [Nvidia GPU Grafana Dashboard](https://grafana.com/grafana/dashboards/6387)
 - [NVIDIA Prometheus Exporter](https://github.com/BugRoger/nvidia-exporter)
 - [DCGM Exporter](https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter)
+- [Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
