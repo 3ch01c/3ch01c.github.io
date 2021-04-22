@@ -576,7 +576,8 @@ Regardless if you use certificates or service accounts, you need to create a `Ro
 
 ```
 kubectl create clusterrole podreader --verb=get --verb=list --verb=watch --resource=pods
-kubectl create clusterrolebinding podreader --serviceaccount=default:podreader --clusterrole=podreader
+kubectl create clusterrolebinding podreader --clusterrole=podreader --user=myuser # if using user certificate
+#kubectl create clusterrolebinding podreader --clusterrole=podreader --serviceaccount=default:podreader # if using serviceaccount
 ```
 
 ### Accessing multiple clusters (contexts)
