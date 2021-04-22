@@ -14,7 +14,7 @@
 - [Nvidia](#nvidia)
   - [GPU Monitoring](#gpu-monitoring)
 - [High Availability](#high-availability)
-- [Users](#users)
+- [Role Based Access Control (RBAC](#role-based-access-control)
 
 ## Installation
 
@@ -529,19 +529,66 @@ status: {}
 EOF
 ```
 
-## Users
+## Role Based Access Control (RBAC)
+
+In a real world environment, you probably don't want to use admin credentials just like you wouldn't use root credentials. To do so, create a [user certificate](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user) or [`ServiceAccount`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
+
+### User Certificates
+
+To set up a user certificate, generate a certificate signing request, approve it, and export the certificate.
+
+```sh
+openssl req -newkey rsa:2048 -nodes -sha256 -keyout podreader.key -out podreader.csr -subj /CN=podreader@example.com
+cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: podreader
+spec:
+  groups:
+  - system:authenticated
+  request: $(cat podreader.csr | base64 | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+EOF
+kubectl certificate approve podreader
+kubectl get csr podreader -o jsonpath='{.status.certificate}'| base64 -d > podreader.crt
+```
+
+### Service Accounts
+
+To set up a `ServiceAccount`, use `kubectl`.
+
+```sh
+kubectl create serviceaccount podreader
+```
+
+To get the authentication token for a `ServiceAccount`:
+
+```sh
+TOKEN=$(kubectl describe secrets "$(kubectl describe serviceaccount podreader | grep -i Tokens | awk '{print $2}')" | grep token: | awk '{print $2}')
+```
+
+### Roles & Role Bindings
+
+Regardless if you use certificates or service accounts, you need to create a `Role` (or `ClusterRole` if it's for cluster-wide operations) defining the permissions, and a `RoleBinding` (or `ClusterRoleBinding`) to associate the account with the role (thereby giving it permissions).
+
+```
+kubectl create clusterrole podreader --verb=get --verb=list --verb=watch --resource=pods
+kubectl create clusterrolebinding podreader --serviceaccount=default:podreader --clusterrole=podreader
+```
 
 ### Accessing multiple clusters (contexts)
 
-On the machine you'll be using `kubectl`, create a new `cluster`, `user`, and `context` for each target cluster.
+On the machine you'll be using `kubectl`, create a new `cluster`, `user`, and/or `context` as needed.
 
 ```sh
 kubectl config set-cluster development --server=https://1.2.3.4 --certificate-authority=fake-ca-file
-kubectl config set-user developer --client-certificate=fake-cert-file --client-key=fake-key-seefile
+kubectl config set-user developer --client-certificate=/path/to/user.crt --client-key=/path/to/user.key # if using certificate authentication
+# kubectl config set-user developer --token=$TOKEN # if using token authentication
 kubectl config set-context dev --cluster=development --user=developer --namespace=default
 ```
-
-If you initialize your clusters with `kubeadm init`, you should have admin credentials stored in `/etc/kubernetes/admin.conf` on the manager node of each cluster. You can copy the the `certificate-authority-data`, `client-certificate-data`, and `client-key-data` key-value pairs and insert them in to your local configuration file (default is `$HOME/.kube/config`).
 
 To use a specific context:
 
@@ -569,3 +616,5 @@ kubectl config view --minify
 - [NVIDIA Prometheus Exporter](https://github.com/BugRoger/nvidia-exporter)
 - [DCGM Exporter](https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter)
 - [Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+- [Create user in Kubernetes for kubectl](https://stackoverflow.com/a/55534445)
+- [Certificate Signing Requests](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
