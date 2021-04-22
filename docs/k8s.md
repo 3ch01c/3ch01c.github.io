@@ -14,7 +14,7 @@
 - [Nvidia](#nvidia)
   - [GPU Monitoring](#gpu-monitoring)
 - [High Availability](#high-availability)
-- [Role Based Access Control (RBAC](#role-based-access-control-rbac)
+- [Role Based Access Control (RBAC)](#role-based-access-control-rbac)
 
 ## Installation
 
