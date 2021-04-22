@@ -14,6 +14,7 @@
 - [Nvidia](#nvidia)
   - [GPU Monitoring](#gpu-monitoring)
 - [High Availability](#high-availability)
+- [Users](#users)
 
 ## Installation
 
@@ -526,6 +527,32 @@ spec:
     name: haproxyconf
 status: {}
 EOF
+```
+
+## Users
+
+### Accessing multiple clusters (contexts)
+
+On the machine you'll be using `kubectl`, create a new `cluster`, `user`, and `context` for each target cluster.
+
+```sh
+kubectl config set-cluster development --server=https://1.2.3.4 --certificate-authority=fake-ca-file
+kubectl config set-user developer --client-certificate=fake-cert-file --client-key=fake-key-seefile
+kubectl config set-context dev --cluster=development --user=developer --namespace=default
+```
+
+If you initialize your clusters with `kubeadm init`, you should have admin credentials stored in `/etc/kubernetes/admin.conf` on the manager node of each cluster. You can copy the the `certificate-authority-data`, `client-certificate-data`, and `client-key-data` key-value pairs and insert them in to your local configuration file (default is `$HOME/.kube/config`).
+
+To use a specific context:
+
+```sh
+kubectl config use-context development
+```
+
+To see the current context's configuration:
+
+```sh
+kubectl config view --minify
 ```
 
 ## References
