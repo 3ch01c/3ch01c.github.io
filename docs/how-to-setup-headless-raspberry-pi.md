@@ -31,6 +31,19 @@ network={
 }
 ```
 
+If you don't want to use your plaintext WiFi password, you can use the `wpa_passphrase` to generate a PSK.
+
+```sh
+$ wpa_passphrase my_ssid
+# reading passphrase from stdin
+P@ssw0rd!
+network={
+        ssid="my_ssid"
+        #psk="P@ssw0rd!"
+        psk=7bd9400bdeab430431b34fd463df8287ed93875aa56bae7d5e703388f647082f
+}
+```
+
 ## Enable SSH
 
 Create an empty file called `ssh` to the root of the `boot` partition of your newly imaged SD card.
