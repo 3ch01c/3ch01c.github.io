@@ -28,6 +28,7 @@ export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 # My scripts
 export PATH=$HOME/Projects/3ch01c.github.io/sh:$PATH
 #export PATH=$PATH:$HOME/projects/3ch01c/utils
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Set up proxy
 #. proxy.sh
 # Start Minikube
