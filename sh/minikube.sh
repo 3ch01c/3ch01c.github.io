@@ -1,7 +1,4 @@
 #!/bin/bash
-CPUS=4
-MEMORY=4096
-DRIVER="virtualbox"
 DELETE=0
 UPGRADE=0
 VERBOSITY=0
@@ -9,13 +6,11 @@ VERBOSITY=0
 printHelp () {
   echo "A script to create a Minikube VM."
 	echo ""
-	echo "Usage: $0 [--cpus CPUS] [--memory MEMORY] [--driver DRIVER] [--delete] [--upgrade] [-v]"
-  echo "  --cpus CPUS number of CPUs (default: $CPUS)"
-  echo "  --memory MEMORY Memory in MBs (default: $MEMORY)"
-  echo "  --driver DRIVER Virtualization driver (default: $DRIVER)"
-  echo "  --delete Delete/overwrite existing Minikube VM"
-  echo "  --upgrade Upgrade Minikube"
+	echo "Usage: $0 [--delete] [--upgrade] [-v]"
+  echo "      --delete Delete/overwrite existing Minikube VM"
+  echo "      --upgrade Upgrade Minikube"
 	echo "  -v, --verbose increase output verbosity"
+  minikube start -h | grep "--" -
   echo ""
   exit 0
 }
@@ -23,20 +18,6 @@ printHelp () {
 msg_info () {
   if [[ $VERBOSITY == 1 ]]; then echo "$1"; fi
 }
-
-while [[ $# -gt 0 ]]; do
-	key="$1"
-	case $key in
-    -h|--help) printHelp ;;
-    --cpus) CPUS=$2; shift ;;
-    --memory) MEMORY=$2; shift ;;
-    --driver) DRIVER=$2; shift ;;
-    --delete) DELETE=1 ;;
-    --upgrade) UPGRADE=1 ;;
-		-v|--verbose) VERBOSITY=1 ;;
-	esac
-	shift
-done
 
 countup () {
   secs=$(expr $(date +%s) - $1)
@@ -52,7 +33,7 @@ if [[ $UPGRADE == 1 ]]; then
   brew upgrade minikube
 fi
 msg_info "* Start Minikube"
-minikube start --cpus $CPUS --memory $MEMORY --driver $DRIVER #--cni calico --container-runtime containerd
+minikube start $@
 if [ ! -z ${no_proxy+x} ]; then
   # Used by the minikube kvm2 driver.
   if [[ $DRIVER == "kvm2" ]]; then no_proxy=$no_proxy,192.168.39.0/24
