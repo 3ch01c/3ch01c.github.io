@@ -2,7 +2,7 @@ colorscheme default
 syn enable
 set ai si
 set ts=4 sw=4 sts=4 et smarttab shiftround
-set nowrap tw=80
+set nowrap
 set sidescrolloff=5
 set hlsearch ignorecase smartcase incsearch
 set encoding=utf-8
