@@ -28,7 +28,21 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
 # Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# My scripts
-export PATH="$HOME/Projects/3ch01c.github.io/sh:$PATH"
 # Krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# postgres operator
+export PATH=$HOME/.pgo/pgo:$PATH
+export PGOUSER=$HOME/.pgo/pgo/pgouser
+export PGO_CA_CERT=$HOME/.pgo/pgo/client.crt
+export PGO_CLIENT_CERT=$HOME/.pgo/pgo/client.crt
+export PGO_CLIENT_KEY=$HOME/.pgo/pgo/client.key
+export PGO_APISERVER_URL='https://127.0.0.1:8443'
+export PGO_NAMESPACE=pgo
+# My scripts
+export PATH="$HOME/Projects/3ch01c.github.io/sh:$PATH"
+# Set up proxy
+#. proxy.sh
+# Set up Minikube
+#. minikube.sh
+# Set up Docker Machine
+#. start_docker_machine.sh
