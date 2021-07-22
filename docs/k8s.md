@@ -13,8 +13,14 @@
   - [Prometheus](#prometheus)
 - [Nvidia](#nvidia)
   - [GPU Monitoring](#gpu-monitoring)
+  - [kubeflow](#kubeflow)
 - [High Availability](#high-availability)
 - [Role Based Access Control (RBAC)](#role-based-access-control-rbac)
+  - [User Certificates](#user-certificates)
+  - [Service Accounts](#service-accounts)
+  - [Roles & Role Bindings](#roles--role-bindings)
+  - [Accessing multiple clusters (contexts)](#accessing-multiple-clusters-contexts)
+- [References](#references)
 
 ## Installation
 
@@ -116,9 +122,9 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 Initialize the [control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/). The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
 
-* Make sure the `--pod-network-cidr` doesn't conflict with your LAN network (e.g., if you're already using 192.168.0.0/16 for your host LAN, use 10.0.0.0/16 or something else that's available). You might need to use a specific pod network CIDR depending on your [pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
-* The `--apiserver-advertise-address` is the IP address of the interfaces your API server communicates on. It defaults to the interface of the default gateway.
-* If you're setting up a high-availability cluster, the `--control-plane-endpoint` is the address of the control plane load balancer.
+- Make sure the `--pod-network-cidr` doesn't conflict with your LAN network (e.g., if you're already using 192.168.0.0/16 for your host LAN, use 10.0.0.0/16 or something else that's available). You might need to use a specific pod network CIDR depending on your [pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
+- The `--apiserver-advertise-address` is the IP address of the interfaces your API server communicates on. It defaults to the interface of the default gateway.
+- If you're setting up a high-availability cluster, the `--control-plane-endpoint` is the address of the control plane load balancer.
 
 ```sh
 sudo kubeadm init --pod-network-cidr 192.168.0.0/16 # single-node default
@@ -214,7 +220,7 @@ until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; 
 kubectl create -f manifests/
 ```
 
-Access the Grafana dashboard by setting up a port-forward then accessing from your browser at http://localhost:3000.
+Access the Grafana dashboard by setting up a port-forward then accessing from your browser at <http://localhost:3000>.
 
 ```sh
 kubectl --namespace monitoring port-forward svc/grafana 3000
@@ -415,8 +421,6 @@ kubectl port-forward $(kubectl get pods -lapp=nvidia-dcgm-exporter -n gpu-operat
 
 ### kubeflow
 
-
-
 ## High Availability
 
 On each node in the cluster, create service configuration files for `keepalived` and `haproxy`.
@@ -586,8 +590,8 @@ On the machine you'll be using `kubectl`, create a new `cluster`, `user`, and/or
 
 ```sh
 kubectl config set-cluster development --server=https://1.2.3.4 --certificate-authority=fake-ca-file
-kubectl config set-user developer --client-certificate=/path/to/user.crt --client-key=/path/to/user.key # if using certificate authentication
-# kubectl config set-user developer --token=$TOKEN # if using token authentication
+kubectl config set-credentials developer --client-certificate=/path/to/user.crt --client-key=/path/to/user.key # if using certificate authentication
+# kubectl config set-credentials developer --token=$TOKEN # if using token authentication
 kubectl config set-context dev --cluster=development --user=developer --namespace=default
 ```
 
