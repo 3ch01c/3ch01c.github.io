@@ -83,5 +83,6 @@ If that doesn't work, try setting the GPG program. Maybe it's `gpg` or maybe it'
 
 ```sh
 GPG_PROGRAM="gpg"
+# GPG_PROGRAM="C:\Program Files (x86)\GnuPG\bin\gpg.exe" # For Windows
 git config --global gpg.program $GPG_PROGRAM
 ```
