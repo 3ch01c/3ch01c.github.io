@@ -24,6 +24,8 @@ else
   export no_proxy=${no_proxy},10.0.0.8/16,172.16.0.0/12,192.168.0.0/16
   # Don't use proxy for the domain of the proxy server
   export no_proxy=${no_proxy},$(echo "$http_proxy" | awk -F. '{print "."$2"."$3}' | awk -F: '{print $1}')
+  # Don't use proxy for "internal" domain, e.g. kubernetes.docker.internal, minikube.internal, etc.
+  export no_proxy=${no_proxy},.internal
   export NO_PROXY=$no_proxy
   export VAGRANT_HTTP_PROXY=$http_proxy
   export VAGRANT_HTTPS_PROXY=$https_proxy
