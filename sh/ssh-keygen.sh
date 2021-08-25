@@ -7,7 +7,7 @@
 TYPE="ed25519"
 ROUNDS=100
 BITLENGTH=2048
-CN="id_rsa"
+CN="id_ed25519"
 
 printHelp () {
 	echo "Usage: $0 [-t TYPE] [-a ROUNDS] [-b BITLENGTH] [-N PASSPHRASE] CN"
@@ -46,7 +46,7 @@ while [[ $# -gt 0 ]]; do
         shift
         ;;
         *)
-		CN=$1
+        CN=$1
 	esac
 	shift
 done
