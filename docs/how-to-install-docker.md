@@ -15,7 +15,7 @@ curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 If you're using a Raspberry Pi or other ARM-based computer, [skip to the RPi section](#rpi). Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
 
 ```sh
-DOCKER_COMPOSE_VERSION="2.0.0"
+DOCKER_COMPOSE_VERSION="v2.0.1"
 ```
 
 Download `docker-compose`.
