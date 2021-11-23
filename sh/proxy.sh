@@ -21,7 +21,7 @@ else
   export HTTPS_PROXY=$https_proxy
   export no_proxy=127.0.0.1,localhost
   # Private subnets for programs that support it
-  export no_proxy=${no_proxy},10.0.0.8/16,172.16.0.0/12,192.168.0.0/16
+  export no_proxy=${no_proxy},10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
   # Don't use proxy for the domain of the proxy server
   export no_proxy=${no_proxy},$(echo "$http_proxy" | awk -F. '{print "."$2"."$3}' | awk -F: '{print $1}')
   # Don't use proxy for "internal" domain, e.g. kubernetes.docker.internal, minikube.internal, etc.
