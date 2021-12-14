@@ -240,7 +240,7 @@ Uninstall pre-existing Nvidia drivers.
 
 ```sh
 # On Ubuntu
-sudo apt remove nvidia-driver-450
+sudo apt remove nvidia-driver-450 # might be a different version number
 sudo apt autoremove
 ```
 
