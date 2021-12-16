@@ -99,7 +99,15 @@ sudo apt-get install -y kubelet kubeadm kubectl
 It's recommended to pin package versions.
 
 ```sh
-sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli
+```
+
+If you ever want to upgrade those packages, you can unhold them.
+
+```sh
+sudo apt-mark unhold kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli
+sudo apt update
+sudo apt upgrade kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli -y
 ```
 
 ##### Other K8s Flavors
@@ -194,6 +202,8 @@ See all resources in your cluster.
 ```sh
 kubectl get all -A -o wide
 ```
+
+If you ever want to get rid of your cluster, use `kubeadm reset`.
 
 ## Helm
 
