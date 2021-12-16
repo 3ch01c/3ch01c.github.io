@@ -227,26 +227,52 @@ helm init --client-only
 
 ### Prometheus
 
-Deploy the `kube-prometheus` stack.
+Add the Bitnami Helm repo.
 
 ```sh
-git clone https://github.com/prometheus-operator/kube-prometheus.git
-cd kube-prometheus
-kubectl create -f manifests/setup
-until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-kubectl create -f manifests/
+helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
-Access the Grafana dashboard by setting up a port-forward then accessing from your browser at <http://localhost:3000>.
+Install the Prometheus chart.
 
 ```sh
-kubectl --namespace monitoring port-forward svc/grafana 3000
+helm install prometheus bitnami/kube-prometheus
 ```
+
+Watch the Prometheus Operator Deployment status using the command:
+
+    kubectl get deploy -w --namespace default -l app.kubernetes.io/name=kube-prometheus-operator,app.kubernetes.io/instance=prometheus
+
+Watch the Prometheus StatefulSet status using the command:
+
+    kubectl get sts -w --namespace default -l app.kubernetes.io/name=kube-prometheus-prometheus,app.kubernetes.io/instance=prometheus
+
+Prometheus can be accessed via port "9090" on the following DNS name from within your cluster:
+
+    prometheus-kube-prometheus-prometheus.default.svc.cluster.local
+
+To access Prometheus from outside the cluster execute the following commands:
+
+    echo "Prometheus URL: http://127.0.0.1:9090/"
+    kubectl port-forward --namespace default svc/prometheus-kube-prometheus-prometheus 9090:9090
+
+Watch the Alertmanager StatefulSet status using the command:
+
+    kubectl get sts -w --namespace default -l app.kubernetes.io/name=kube-prometheus-alertmanager,app.kubernetes.io/instance=prometheus
+
+Alertmanager can be accessed via port "9093" on the following DNS name from within your cluster:
+
+    prometheus-kube-prometheus-alertmanager.default.svc.cluster.local
+
+To access Alertmanager from outside the cluster execute the following commands:
+
+    echo "Alertmanager URL: http://127.0.0.1:9093/"
+    kubectl port-forward --namespace default svc/prometheus-kube-prometheus-alertmanager 9093:9093
 
 To remove `kube-prometheus`:
 
 ```sh
-kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+helm delete prometheus
 ```
 
 ## Nvidia
