@@ -108,6 +108,7 @@ If you ever want to upgrade those packages, you can unhold them.
 sudo apt-mark unhold kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli
 sudo apt update
 sudo apt upgrade kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli -y
+sudo apt-mark hold kubelet kubeadm kubectl containerd.io docker-ce docker-ce-cli
 ```
 
 ##### Other K8s Flavors
@@ -133,8 +134,10 @@ Initialize the [control-plane node](https://kubernetes.io/docs/setup/production-
 - Make sure the `--pod-network-cidr` doesn't conflict with your LAN network (e.g., if you're already using 192.168.0.0/16 for your host LAN, use 10.0.0.0/16 or something else that's available). You might need to use a specific pod network CIDR depending on your [pod network add-on](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network).
 - The `--apiserver-advertise-address` is the IP address of the interfaces your API server communicates on. It defaults to the interface of the default gateway.
 - If you're setting up a high-availability cluster, the `--control-plane-endpoint` is the address of the control plane load balancer.
+- If you're behind a proxy, make sure your `no_proxy` environment variable has the k8s IP addresses including your node IP(s) and pod network.
 
 ```sh
+# export no_proxy=$no_proxy,192.168.0.0/16,172.31.27.0 # ignore proxy for k8s IPs
 sudo kubeadm init --pod-network-cidr 192.168.0.0/16 # single-node default
 # sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --apiserver-advertise-address=172.31.27.0 # single-node non-default interface
 # sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --control-plane-endpoint k8s-example-1234567890.us-west-1.elb.amazonaws.com # ha cluster
@@ -204,6 +207,10 @@ kubectl get all -A -o wide
 ```
 
 If you ever want to get rid of your cluster, use `kubeadm reset`.
+
+```sh
+sudo kubeadm reset
+```
 
 ## Helm
 
