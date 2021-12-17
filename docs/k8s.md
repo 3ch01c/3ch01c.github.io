@@ -302,7 +302,7 @@ docker version
 If using Ubuntu 18.04 or later, disable the `nouveau` driver.
 
 ```sh
-sudo cat << EOF > /etc/modprobe.d/blacklist-nouveau.conf
+cat << EOF | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
 blacklist nouveau
 options nouveau modeset=0
 EOF
@@ -316,7 +316,7 @@ helm repo add nvidia https://nvidia.github.io/gpu-operator
 helm repo update
 ```
 
-Check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-feature-discovery) is already enabled.
+Run the following command to check if [Node Feature Discovery (NFD)](https://github.com/kubernetes-sigs/node-feature-discovery) is already enabled. If it returns resources, it's enabled. Otherwise, it's not.
 
 ```sh
 kubectl -n node-feature-discovery get all
@@ -369,19 +369,21 @@ gfd:
 Install `nvidia/gpu-operator`. If NFD is already enabled, add `--set nfd.enabled=false` to the command.
 
 ```sh
-helm install -f values.yml gpu-operator nvidia/gpu-operator
+kubectl create ns gpu-operator
+helm install -n gpu-operator -f values.yml -n gpu-operator gpu-operator nvidia/gpu-operator # if nfd is not enabled
+# helm install -n gpu-operator -f values.yml -n gpu-operator --set nfd.enabled=true gpu-operator nvidia/gpu-operator # if nfd is enabled
 ```
 
-Check all the pods are running.
+Check all the pods are running. This can take several minutes.
 
 ```sh
-kubectl get pods -A
+watch kubectl get pods -A
 ```
 
 If you get a `CrashLoopBackOff` with the `nvidia-driver-daemonset` pod, check the logs.
 
 ```
-kubectl logs -f nvidia-driver-daemonset-k5mh2 -n gpu-operator-resources
+kubectl logs -n gpu-operator -f nvidia-driver-daemonset-k5mh2
 ```
 
 If there's an error `Could not unload NVIDIA driver kernel modules, driver is in use`, you probably need to reboot the node.
@@ -393,7 +395,7 @@ sudo reboot
 If you ever need to uninstall/reinstall the GPU operator, reboot the node to finish unloading the GPU drivers.
 
 ```
-helm uninstall nvidia/gpu-operator
+helm delete -n gpu-operator gpu-operator
 sudo reboot
 ```
 
@@ -414,7 +416,7 @@ tee dcgmScrapeConfig.yaml <<EOF
   - role: endpoints
     namespaces:
       names:
-      - gpu-operator-resources
+      - gpu-operator
 
   relabel_configs:
   - source_labels: [__meta_kubernetes_pod_node_name]
@@ -428,7 +430,8 @@ Deploy [prometheus-operator](https://github.com/helm/charts/tree/master/stable/p
 ```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm install --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml --generate-name prometheus-community/kube-prometheus-stack
+kubectl create ns prom-operator
+helm install -n prom-operator --set additionalScrapeConfigs=./dcgmScrapeConfig.yaml prom-operator prometheus-community/kube-prometheus-stack
 ```
 
 Optional: add port forwarding for Prometheus.
@@ -440,7 +443,7 @@ kubectl port-forward $(kubectl get pods -lapp=prometheus -ojsonpath='{range .ite
 Get Grafana admin credentials.
 
 ```sh
-kubectl get secret -lapp.kubernetes.io/name=grafana -o jsonpath='{.items[0].data.admin-password}' | base64 --decode ; echo
+export GRAFANA_PASSWORD=$(kubectl get secret -n prom-operator -lapp.kubernetes.io/name=grafana -o jsonpath='{.items[0].data.admin-password}' | base64 --decode ; echo)
 ```
 
 Set up port forwarding for Grafana.
