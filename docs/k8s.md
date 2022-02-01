@@ -166,8 +166,8 @@ kubectl get pods -A
 You might notice some pods in `Pending` status because you need to deploy a pod network add-on like [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart).
 
 ```sh
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
 ```
 
 Watch the pods until they're all in the 'Running' state.
