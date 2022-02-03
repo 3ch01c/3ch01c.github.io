@@ -35,5 +35,6 @@ Sometimes I plan to blog or something here, but then it just comes out as notes.
 - [How to add metadata to media files](docs/how-to-add-metadata-to-media-files.md)
 - [How to set up RetroPie](docs/retropie.md)
 - [How to set up headless Raspberry Pi](docs/how-to-setup-headless-raspberry-pi.md)
+- [How to set up Kubernetes](docs/k8s.md)
 
 ![BOINC Stats](https://www.boincstats.com/signature/-1/user/73865533687/sig.png)
