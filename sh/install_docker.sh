@@ -2,7 +2,7 @@
 # Install Docker, docker-compose, and add the current user to the docker group.
 
 DOCKER_VERSION="get" # or "test" for latest
-DOCKER_COMPOSE_VERSION="v2.0.1"
+DOCKER_COMPOSE_VERSION="v2.2.3"
 
 # Install docker
 curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
