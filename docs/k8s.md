@@ -188,6 +188,12 @@ If you see an error `Kernel's RPF check is set to 'loose'.`, you can change disa
 kubectl -n kube-system set env daemonset/calico-node FELIX_IGNORELOOSERPF=true
 ```
 
+If you're having other issues, check the event logs.
+
+```sh
+kubectl get events --sort-by='.metadata.creationTimestamp' -A
+```
+
 If you're running a single-node cluster, untaint the master node so it's available for scheduling.
 
 ```sh
