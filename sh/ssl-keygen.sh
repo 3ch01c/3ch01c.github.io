@@ -20,7 +20,7 @@ while [[ $# -gt 0 ]]; do
 	case $key in
 		-h|--help) printHelp ;;
 		-c|--config) CONFIG=$2; shift ;;
-    -v|--verbose) VERBOSE=1 ;;
+        -v|--verbose) VERBOSE=1 ;;
 		*) CN=$1
 	esac
 	shift
