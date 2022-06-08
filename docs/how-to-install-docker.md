@@ -38,7 +38,7 @@ docker run hello-world
 If you're using a Raspberry Pi or other ARM-based computer, [skip to the RPi section](#rpi). Pick a version of `docker-compose` from the [releases](https://github.com/docker/compose/releases).
 
 ```sh
-DOCKER_COMPOSE_VERSION="v2.2.3"
+DOCKER_COMPOSE_VERSION="v2.6.0"
 ```
 
 Download `docker-compose`.
