@@ -14,7 +14,7 @@ Download and run the Docker installer script. If you're using RHEL, you may need
 curl -fsSL https://$DOCKER_VERSION.docker.com | sh -
 ```
 
-Add the user to the `docker` group.
+Add the user to the `docker` group. Want to [install rootless Docker](https://docs.docker.com/engine/security/rootless) instead?
 
 ```sh
 sudo usermod -aG docker $USER
