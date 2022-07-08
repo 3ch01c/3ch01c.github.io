@@ -1,7 +1,7 @@
 #!/bin/bash
 DELETE=0
 UPGRADE=0
-VERBOSITY=0
+VERBOSE=0
 
 printHelp () {
   echo "A script to create a Minikube VM."
@@ -15,8 +15,22 @@ printHelp () {
   exit 0
 }
 
+#if [[ $# -eq 0 ]]; then
+#	printHelp
+#fi
+#while [[ $# -gt 0 ]]; do
+#	key="$1"
+#	case $key in
+#		-h|--help) printHelp ;;
+#		--delete) DELETE=1 ;;
+#    --upgrade) UPGRADE=1 ;;
+#    -v|--verbose) VERBOSE=1 ;;
+#	esac
+#	shift
+#done
+
 msg_info () {
-  if [[ $VERBOSITY == 1 ]]; then echo "$1"; fi
+  if [[ $VERBOSE == 1 ]]; then echo "$1"; fi
 }
 
 countup () {
