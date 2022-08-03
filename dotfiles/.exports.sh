@@ -3,6 +3,10 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 export PATH="/usr/local/sbin:$PATH"
 # GPG
 export GPG_TTY=$(tty)
+# If you need to have openjdk@8 first in your PATH, run:
+export PATH="/home/me/.linuxbrew/opt/openjdk@8/bin:$PATH"
+# For compilers to find openjdk@8 you may need to set:
+export CPPFLAGS="-I/home/me/.linuxbrew/opt/openjdk@8/include"
 # Anaconda
 export PATH="/usr/local/anaconda3/bin:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
