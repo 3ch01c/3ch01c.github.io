@@ -1,0 +1,6 @@
+# For ChromeOS Linux
+if [ -e '/mnt/chromeos' ]; then
+  source ~/.penguinrc
+fi
+source ~/.exportsrc
+

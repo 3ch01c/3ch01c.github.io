@@ -1,8 +1,9 @@
+source ~/.commonrc
 # Customize prompt
-export PS1="\u@\h:\w \$ "
+PS1="\u@\h:\w \$ "
+export BASH_SILENCE_DEPRECATION_WARNING=1
 # For ChromeOS Linux
 if [ -e '/mnt/chromeos' ]; then
-  . ~/.penguin.bashrc
+  . ~/.penguinrc
 fi
-. ~/.exports.sh
 
