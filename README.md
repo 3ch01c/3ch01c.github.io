@@ -6,7 +6,12 @@ Sometimes [I write code](https://github.com/3ch01c).
 
 Sometimes [I teach other people how to code](https://coderdojolosalamos.wordpress.com).
 
-Sometimes I plan to blog or something here, but then it just comes out as notes.
+You can find me on Mastodon:
+
+- <a rel="me" href="https://data-folks.masto.host/@3ch01c">data-folks.masto.host</a>
+- <a rel="me" href="https://noc.social/@3ch01c">noc.social</a>
+
+Sometimes I plan to blog or put something here, but then it just comes out as notes.
 
 - [How to set up OpenVPN](https://github.com/3ch01c/utils/blob/master/docs/openvpn_setup.md)
 - [How to set up Deluge](https://github.com/3ch01c/utils/blob/master/docs/deluge_setup.md)
