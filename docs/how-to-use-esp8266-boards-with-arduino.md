@@ -10,4 +10,4 @@
 
 5. Set the right port. For me, it's COM5.
 
-6. 
+6. Configure the baud rate. For me, it's 9600.
