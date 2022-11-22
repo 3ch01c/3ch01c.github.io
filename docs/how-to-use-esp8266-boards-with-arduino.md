@@ -1,7 +1,5 @@
 # How to use ESP8266 boards with Arduino
 
-![](https://ibb.co/zNrqz0B)
-
 1. Download the Arduino IDE [v1](https://docs.arduino.cc/software/ide-v1) or [v2](https://docs.arduino.cc/software/ide-v2). I'm using 1.8 on Windows.
 
 2. If it's CP210x chip, download the universal drivers from [here](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads). Unzip, then plug in your board, and then choose _Update Driver_ when it prompts you to install a driver. Point it to the unzipped directory.
