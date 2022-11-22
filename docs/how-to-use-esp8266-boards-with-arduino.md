@@ -1,6 +1,6 @@
 # How to use ESP8266 boards with Arduino
 
-![image](https://user-images.githubusercontent.com/5547581/203403597-b7ae8942-6d4b-47c7-bd13-0cdd7574c3e2.png)
+<img src="https://user-images.githubusercontent.com/5547581/203403597-b7ae8942-6d4b-47c7-bd13-0cdd7574c3e2.png" alt="nodemcu amica esp8266 board" height="400"/>
 
 1. Download the Arduino IDE [v1](https://docs.arduino.cc/software/ide-v1) or [v2](https://docs.arduino.cc/software/ide-v2). I'm using 1.8 on Windows.
 
