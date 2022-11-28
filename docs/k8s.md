@@ -164,6 +164,8 @@ sudo kubeadm init --pod-network-cidr 192.168.0.0/16 # single-node default
    sudo systemctl restart containerd
    ```
    
+1. If it still doesn't want to start up, `sudo kubeadm reset`, restart your server, and try `sudo kubeadm init` again.
+   
 After initialization completes, copy the cluster configuration to your local account so you can communicate with the cluster.
 
 ```sh
