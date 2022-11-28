@@ -143,18 +143,27 @@ sudo kubeadm init --pod-network-cidr 192.168.0.0/16 # single-node default
 # sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --control-plane-endpoint k8s-example-1234567890.us-west-1.elb.amazonaws.com # ha cluster
 ```
 
-Troubleshooting: If you get the error `rpc error: code = Unimplemented desc = unknown service runtime.v1alpha2.RuntimeService`, check `/etc/containerd/config.toml` and comment out the following line if it exists:
+### Troubleshooting
 
-```
-disabled_plugins = ["cri"]
-```
+1. If you get the error `rpc error: code = Unimplemented desc = unknown service runtime.v1alpha2.RuntimeService`, check `/etc/containerd/config.toml` and comment out the following line if it exists:
 
-Then, restart containerd.
+   ```
+   disabled_plugins = ["cri"]
+   ```
 
-```sh
-sudo systemctl restart containerd
-```
+1. Set your proxy environment variables. 
 
+   ```sh
+   sudo systemctl set-environment http_proxy=http://proxy.example.com:8080
+   sudo systemctl set-environment https_proxy=http://proxy.example.com:8080
+   ```
+
+1. Then, restart containerd.
+
+   ```sh
+   sudo systemctl restart containerd
+   ```
+   
 After initialization completes, copy the cluster configuration to your local account so you can communicate with the cluster.
 
 ```sh
