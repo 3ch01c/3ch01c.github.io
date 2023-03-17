@@ -8,7 +8,21 @@ Follow the prompts after running the following command.
 gpg --full-gen-key
 ```
 
-## Revoking a key
+## Export a key
+
+Useful if you want to copy a key to another server.
+
+```sh
+gpg --export-secret-key -a -o example.pgp me@example.com
+```
+
+## Import a key
+
+```sh
+gpg -i example.pgp
+```
+
+## Revoke a key
 
 Find the ID of the key you want to revoke (e.g., `21D5D74C`) and create a revocation certificate.
 
@@ -34,4 +48,12 @@ Push revocation to key servers.
 
 ```sh
 gpg --send-keys KEY_ID
+```
+
+## Create a GPG container
+
+```sh
+docker run -it --rm -v ${PWD}/example.pgp:/example.pgp alpine
+apk add gnupg
+gpg
 ```
