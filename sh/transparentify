@@ -1,0 +1,41 @@
+#!/bin/bash
+# Makes images have transparent background or color
+
+transparency_opts="-background transparent" # make background transparent by default
+
+printHelp () {
+        echo "Usage: $0 [-c COLOR] FILENAME" 
+        echo "       FILENAME: image file to make transparent"
+        echo "       COLOR: color to make transparent (default: background)"
+    echo ""
+        exit 1
+}
+
+if ! command -v convert &> /dev/null
+then
+    echo "ERROR: The `convert` command was not found."
+    echo "Visit https://imagemagick.org/script/download.php for more info."
+    exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+        printHelp
+fi
+while [[ $# -gt 0 ]]; do
+        key="$1"
+        case $key in -h|--help)
+            printHelp
+            ;;
+        -c)
+            transparency_opts="-transparent $2" # make a color transparent
+            shift
+            ;;
+        *)
+            file=$1
+            extension="${file##*.}"
+            filename="${file%.*}"
+            esac
+        shift
+done
+
+convert ${filename}.${extension} ${transparency_opts} ${filename}_transparent.${extension}
