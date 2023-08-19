@@ -11,4 +11,4 @@ if [[ -d /mnt/chromeos ]]; then
     java -Dsun.java2d.uiScale=2.0 -jar QRCodeGen-1.14.3.jar
 else
     java QRCodeGen-1.14.3.jar
-fi`
+fi
