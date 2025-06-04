@@ -15,3 +15,11 @@ This should match your host network configuration.
 ```
 nameserver 192.168.1.1
 ```
+
+### `Logon failure: the user has not been granted the requested logon type at this computer.`
+
+Restart the WSL service.
+
+```powershell
+Get-Service vmcompute | Restart-Service
+```
