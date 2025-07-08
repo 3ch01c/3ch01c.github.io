@@ -54,13 +54,13 @@ _[Thanks Jay Patel!](https://stackoverflow.com/a/28562712/4068278)_
 Enable [credential caching](https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux).
 
 ```sh
-git config --global credential.helper store
 ```
 
 Specify cache expiration.
 
 ```sh
-git config --global credential.helper 'cache --timeout 7200'
+# git config --global credential.helper store # WARNING: stores credentials in plaintext!
+git config --global credential.helper 'cache --timeout 7200' # saves credentials for 2 hours
 ```
 
 ## Troubleshooting
