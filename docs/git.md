@@ -41,7 +41,7 @@ git config --global commit.gpgsign true
 export
 ```
 
-Assign a GPG key for signing commits. If you don't have a GPG key, [here's how to create one](gpg#generate-a-key).
+Assign a GPG key for signing commits. If you don't have a GPG key, [here's how to create one](gpg.md#generate-a-key).
 
 ```sh
 GIT_SIGNING_KEY=$($GPG_PROGRAM --list-keys --with-colons $GIT_USER_EMAIL  | awk -F: '/^pub:/ { print $5 }')
