@@ -61,6 +61,8 @@ Specify cache expiration.
 ```sh
 # git config --global credential.helper store # WARNING: stores credentials in plaintext!
 git config --global credential.helper 'cache --timeout 7200' # saves credentials for 2 hours
+# git config --global credential.helper "/mnt/c/Users/$USER/AppData/Local/Programs/Git/mi
+ngw64/bin/git-credential-manager.exe" # stores credentials in WSL with Git for Windows installed in userland
 ```
 
 ## Troubleshooting
