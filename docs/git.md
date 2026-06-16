@@ -38,10 +38,9 @@ Use GPG signing globally.
 
 ```sh
 git config --global commit.gpgsign true
-export
 ```
 
-Assign a GPG key for signing commits. If you don't have a GPG key, [here's how to create one](gpg#generate-a-key).
+Assign a GPG key for signing commits. If you don't have a GPG key, [here's how to create one](gpg.md#generate-a-key).
 
 ```sh
 GIT_SIGNING_KEY=$($GPG_PROGRAM --list-keys --with-colons $GIT_USER_EMAIL  | awk -F: '/^pub:/ { print $5 }')
@@ -54,13 +53,15 @@ _[Thanks Jay Patel!](https://stackoverflow.com/a/28562712/4068278)_
 Enable [credential caching](https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux).
 
 ```sh
-git config --global credential.helper store
 ```
 
 Specify cache expiration.
 
 ```sh
-git config --global credential.helper 'cache --timeout 7200'
+# git config --global credential.helper store # WARNING: stores credentials in plaintext!
+git config --global credential.helper 'cache --timeout 7200' # saves credentials for 2 hours
+# git config --global credential.helper "/mnt/c/Users/$USER/AppData/Local/Programs/Git/mi
+ngw64/bin/git-credential-manager.exe" # stores credentials in WSL with Git for Windows installed in userland
 ```
 
 ## Troubleshooting
